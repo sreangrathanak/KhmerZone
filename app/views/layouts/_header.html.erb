@@ -1,0 +1,13 @@
+<header class = "container">
+  <div class = "left_head">
+    <img alt = "Training System Logo" src = "/assets/logo.png" />
+  </div>
+  <div class = "right_head">
+    <%if user_signed_in?%>
+      <%= link_to "Welcome #{current_user.name}",current_user%> | 
+      <%= link_to "Sign Out",signout_path%>
+    <%else%>
+      <%= link_to "Sign In",signin_path%> | <%= link_to "Sign Up",signup_path%>
+    <%end%>
+  </div>
+</header>

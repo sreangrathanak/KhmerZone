@@ -1,0 +1,35 @@
+@import "bootstrap";
+
+.page-header, .alert {
+  text-align: center;
+}
+
+.error {
+  list-style: none;
+  color: #A94442;
+}
+
+.left_head{
+  margin:2em 2em 2em 2em;
+  float:left;
+}
+
+.right_head{
+  margin:2em 2em 2em 2em;
+  float:right;
+}
+
+header{
+  border-bottom:2px solid rgb(104,104,104);
+  margin-bottom:10px;
+}
+
+.footer{
+  border-top:2px solid rgb(104,104,104);
+  margin-top:10px;
+  padding-bottom:10px;
+}
+
+.right_footer{
+  float:right;
+}
