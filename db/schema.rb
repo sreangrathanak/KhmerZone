@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103135539) do
+ActiveRecord::Schema.define(version: 20150109022619) do
 
   create_table "categories", force: true do |t|
-    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "product_comments", force: true do |t|
@@ -50,10 +50,23 @@ ActiveRecord::Schema.define(version: 20150103135539) do
     t.float    "discount",    limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "picture"
     t.integer  "category_id"
   end
 
   add_index "products", ["name"], name: "index_products_on_name", using: :btree
+
+  create_table "relationships", force: true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -1,6 +1,15 @@
 <header class = "container">
   <div class = "left_head">
-    <img alt = "Training System Logo" src = "/assets/logo.png" />
+    <%if user_signed_in?%>
+      <%= link_to "Home",root_path%>
+      <%= link_to "Notification",root_path%>
+      <%= link_to "Message",root_path%>
+      <%= link_to "Shops",users_path%>
+    <%else%>
+      <%= link_to "Home",root_path%>
+      <%= link_to "Shops",users_path%>
+    <%end%>
+
   </div>
   <div class = "right_head">
     <%if user_signed_in?%>

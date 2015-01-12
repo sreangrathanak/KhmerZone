@@ -1,0 +1,15 @@
+<li id="product-<%= product.id %>">
+  <%= link_to gravatar_for(product.user, size: 50), product.user %>
+  <span class="user"><%= link_to product.user.name, product.user %></span>
+  <span class="content"><%= product.name %></span>
+  <span class="content"><%= product.price %></span>
+  <span class="content"><%= product.description %></span>
+  <%= image_tag product.picture.url if product.picture? %>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(product.created_at) %> ago.
+    <% if current_user? product.user.id %>
+      <%= link_to "delete", product, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</li>
