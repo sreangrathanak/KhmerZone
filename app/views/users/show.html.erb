@@ -5,14 +5,49 @@
       <h1 class="page-header">Profile</h1>
     </div>
     <div class="panel-body">
-      <div class="gravatar"><%=gravatar_for @user%></div>
-      <div><label>Name:</label><%= @user.name.capitalize %></div>
-      <div><label>Contact: </label><%= @user.email %></div>
-      <%if current_user? @user.id%>
-        <div class ="btn btn-primary btn-edit-user">
-          <%=link_to "Edit",edit_user_path(@user)%>
+    <div class="row">
+      <aside class="col-md-4">
+        <div class="gravatar"><%=gravatar_for @user%></div>
+        <div><label>Name:</label><%= @user.name.capitalize %></div>
+        <div><label>Contact: </label><%= @user.email %></div>
+        
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
+        <div>
+          <%if current_user? @user.id%>
+            <div class ="btn btn-primary btn-edit-user">
+              <%=link_to "Edit",edit_user_path(@user)%>
+            </div>
+          <%end%>
         </div>
-      <%end%>      
+      </aside>
+      <div class="col-md-8">
+        <%= render "follow_form" if user_signed_in? %>
+        <div>
+        <label class="btn btn-primary btnAddPro">Add Product</label>
+        </div>
+        <div class="col-md-7 col-md-offset-1 post_product">
+            <%#= render "shared/product_form" %>
+        </div>        
+        <div class="col-md-12">
+          <% if @user.products.any? %>
+            <h3>Products (<%= @user.products.count %>)</h3>
+            <ol class="products">
+              <%= render @products %>
+            </ol>
+            <%= will_paginate @products %>
+          <% end %>
+        </div>
+      </div>
     </div>
+    </div>      
   </div>
 </div>
+<script type="text/javascript">
+  $(".post_product").hide();
+  $(".btnAddPro").click(function(){    
+    $(".post_product").show();
+    $(".btnAddPro").hide();
+  });
+</script>

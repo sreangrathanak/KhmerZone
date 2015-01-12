@@ -1,0 +1,40 @@
+<%= form_for(@product, html: { multipart: true }) do |f| %>  
+  <%= render "shared/error_message", object: f.object %>
+  <div class="field">  
+    <span class="form-group picture">    
+      <%= f.label :picture %>
+      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+    </span>    
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    </div>    
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.text_field :price, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :discount %>
+      <%= f.text_field :discount, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%=f.select(:category_id,options_from_collection_for_select(Category.all, "id", "name", 1),class: "form-control")%>
+        <%= f.label :category_id %>        
+    </div>  
+    <div class="form-group">
+      <%= f.submit "Post", class: "btn btn-primary" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, placeholder: "Compose new micropost..." %>
+    </div>
+  </div>  
+<% end %>
+<script type="text/javascript">
+  $('#product_picture').bind('change', function() {
+    size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>

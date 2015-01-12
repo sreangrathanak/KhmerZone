@@ -9,6 +9,13 @@ Rails.application.routes.draw do
   get "signin" => "sessions#new", as: :signin
   get "signout" => "sessions#destroy", as: :signout
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   get "signup" => "users#new", as: :signup
+
+  resources :products
+  resources :relationships,       only: [:create, :destroy]
 end

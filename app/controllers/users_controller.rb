@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_action :user_auth, except: [:new, :create]
   before_action :current_user_auth, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
-  
+  before_action :user_auth, only: [:edit, :update, :destroy,
+                                        :following, :followers]
   def new
     @user = User.new
   end
@@ -18,7 +19,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
+  def index
+    @users = User.all.paginate page: params[:page], per_page: 15
+  end
+
+  def show     
+    @user = User.find(params[:id])
+    @products = @user.products.paginate(page: params[:page])    
   end
 
   def edit
@@ -32,6 +39,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render "show_follow"
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render "show_follow"
+  end
+  
   private
 
     def set_user
