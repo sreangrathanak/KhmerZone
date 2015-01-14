@@ -1,4 +1,43 @@
 <% provide :title, "Update Profile" %>
 <div class="col-md-4 col-md-offset-4">
-  <%= render "form", header: "Update Profile", label: "Update" %>  
+  <%#= render "form", header: "Update Profile", label: "Update" %>  
+  <h1 class="page-header">Update Profile</h1>
+  <br />
+  <%= form_for @user, html: { class: "form" } do |f| %>
+    <%= render "shared/error_message", object: f.object %>
+    <div class="form-group"><%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: "form-control" %></div>
+    
+    <div class="form-group"><%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %></div>
+
+    <div class="form-group"><%= f.label :password %>
+    <%= f.password_field :password, class: "form-control" %></div>
+
+    <div class="form-group"><%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control" %></div>
+
+    <div class="form-group"><%= f.label :image %>    
+    <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %></div>
+
+    <div class="form-group"><%= f.label :cover %>    
+    <%= f.file_field :cover, accept: 'image/jpeg,image/gif,image/png' %></div>
+
+    <div><%= f.submit "Update", class: "btn btn-primary form-control" %></div>
+  <% end %>  
 </div>
+
+<script type="text/javascript">
+  $('#user_image').bind('change', function() {
+    size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+  $('#user_cover').bind('change', function() {
+    size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>

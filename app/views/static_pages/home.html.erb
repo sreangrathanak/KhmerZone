@@ -1,15 +1,17 @@
 <% if user_signed_in? %>
-  <div class="row">
-    <aside class="col-md-4">
+  <div class="row home-info">
+    <aside class="col-md-2">
       <section class="user_info">
         <%= render "shared/user_info" %>
       </section>      
     </aside>
-    <div class="col-md-8">
-      <h3>Product Feed</h3>
+    <div class="col-md-7">
       <%= render "shared/feed" %>
     </div>
-  </div>
+    <div class="col-md-3">
+      Suggested Shop
+    </div>
+  </div>         
 <% else %>
   
 <% end %>

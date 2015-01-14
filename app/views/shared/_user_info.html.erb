@@ -1,4 +1,4 @@
-<%= link_to gravatar_for(current_user, size: 50), current_user %>
-<h1><%= current_user.name %></h1>
-<span><%= link_to "view my profile", current_user %></span>
+<%=link_to image_tag(current_user.image? ? current_user.image.url : 
+              "profile_default.png",class:"user_midle_image img-thumbnail"),current_user%>
+<div><b><%=link_to current_user.name,current_user %></b></div>
 <span><%= pluralize(current_user.products.count, "products") %></span>

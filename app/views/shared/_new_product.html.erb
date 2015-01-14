@@ -1,0 +1,16 @@
+ <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">New Productl</h4>
+      </div>
+      <div class="modal-body">      
+        <%= form_for(current_user.products.build) do |f| %>  
+          <%=render "shared/product_form", f: f%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
