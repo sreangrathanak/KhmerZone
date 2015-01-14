@@ -1,20 +1,27 @@
 class ProductsController < ApplicationController 
   before_action :user_auth, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
+  
   def create
-    @product = current_user.products.build product_params
-    if @product.save
-      flash[:success] = "Product created!"
-      redirect_to root_url
-    else      
-      @user=current_user
-      @products = current_user.products.paginate(page: params[:page])
-      redirect_to user_path @user
-    end
+     @product = current_user.products.new product_params
+      if @product.save
+        redirect_to root_url
+      else
+        redirect_to root_url
+      end    
+  end
+
+  def update
+    @product = Product.find(params[:id])
+      if @product.update_attributes product_params
+        redirect_to root_url
+      else
+        render :action => "edit"
+      end
   end
 
   def destroy
-    @product.destroy
+    Product.find(params[:id]).destroy
     flash[:success] = "Product deleted"
     redirect_to request.referrer || root_url
   end

@@ -1,5 +1,6 @@
-<li id="product-<%= product.id %>">
-  <%= link_to gravatar_for(product.user, size: 50), product.user %>
+<li id="product-<%= product.id %>" class="products">  
+  <%=image_tag(product.user.image? ? product.user.image.url : 
+              "profile_default.png",class:"user_small_image img-circle")%>
   <span class="user"><%= link_to product.user.name, product.user %></span>
   <span class="content"><%= product.name %></span>
   <span class="content"><%= product.price %></span>
@@ -7,9 +8,15 @@
   <%= image_tag product.picture.url if product.picture? %>
   <span class="timestamp">
     Posted <%= time_ago_in_words(product.created_at) %> ago.
-    <% if current_user? product.user.id %>
-      <%= link_to "delete", product, method: :delete,
+    <% if current_user? product.user.id %>      
+      <%= link_to "update", edit_product_path(product),
+      :data=>{target:"#productUpdateModal-#{product.id}",toggle:"modal"}%>
+      <%= link_to " | delete", product, method: :delete,
                                        data: { confirm: "You sure?" } %>
+
+      <div>
+        <%= render "shared/update_product", product:product%>
+      </div>
     <% end %>
   </span>
 </li>

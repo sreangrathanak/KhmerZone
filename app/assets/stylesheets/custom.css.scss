@@ -1,5 +1,13 @@
 @import "bootstrap";
 
+ul {
+  list-style: none;
+}
+
+li{
+  list-style: none;
+}
+
 .page-header, .alert {
   text-align: center;
 }
@@ -10,12 +18,13 @@
 }
 
 .left_head{
-  margin:2em 2em 2em 2em;
+  margin:0 2em 0 2em;
   float:left;
 }
 
 .right_head{
-  margin:2em 2em 2em 2em;
+  margin:0 3em 0 0;
+  padding-top:0.5em;
   float:right;
 }
 
@@ -92,4 +101,56 @@ input {
 
 .users.follow {
   padding: 0;
+}
+
+.user_small_image{
+   width: 35px;
+   height: 35px;
+}
+
+.user_big_image{
+  width: 150px;
+  height: 150px; 
+}
+
+.user_midle_image{
+  width: 80px;
+  height: 80px;  
+}
+
+.user_follow_image{
+  width: 30px;
+  height: 30px; 
+}
+
+.user_cover{
+  width: 100%;
+  height: 300px;
+  position:relative;
+}
+
+.my-btn{
+  padding-right:0.2em;
+}
+
+.my_body{
+clear:both;  
+  padding-top:3em;
+}
+
+.user-profile-info{
+  margin-top:-5em;
+}
+
+.home-info{
+  padding-top:0.8em;
+}
+
+.products{
+  margin-top:0.7em;
+}
+
+#follow_form{
+  position:absolute;
+  margin:-2em 3em 0 -9em;
 }

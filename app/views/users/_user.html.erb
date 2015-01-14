@@ -1,6 +1,7 @@
 <% if user != current_user %>
-  <li class="list-group-item">
+  <li class="">    
+    <%= link_to image_tag(user.image? ? user.image.url : 
+              "profile_default.png",class:"user_midle_image img-thumbnail"),user%>
     <%= link_to user.name, user %>
-    <%= link_to gravatar_for(user, size: 60), user, class: "thumbnail" %>
   </li>
 <% end %>

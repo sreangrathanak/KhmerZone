@@ -1,38 +1,36 @@
-<% provide :title, "Users" %>
-<div>
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h1 class="page-header">Profile</h1>
-    </div>
-    <div class="panel-body">
+<% provide :title, "Users" %> 
     <div class="row">
-      <aside class="col-md-4">
-        <div class="gravatar"><%=gravatar_for @user%></div>
-        <div><label>Name:</label><%= @user.name.capitalize %></div>
-        <div><label>Contact: </label><%= @user.email %></div>
-        
-        <section class="stats">
-          <%= render 'shared/stats' %>
-        </section>
-        <div>
-          <%if current_user? @user.id%>
-            <div class ="btn btn-primary btn-edit-user">
-              <%=link_to "Edit",edit_user_path(@user)%>
-            </div>
+      <div class=".col-md-9 .col-md-push-3">
+          <%if current_user? @user.id%>            
+              <%=link_to image_tag(@user.cover? ? @user.cover.url : 
+              "user_default_cover.jpg",class:"user_cover img-rounded"),edit_user_path(@user)%>
+          <%else%>
+            <%=image_tag(@user.cover? ? @user.cover.url : 
+            "user_default_cover.jpg",class:"user_cover img-rounded")%>
           <%end%>
+
+        <div class="pull-right">
+          <%= render "follow_form" if user_signed_in? %>          
         </div>
+      </div>
+      <aside class="col-md-2 user-profile-info">
+          <%if current_user? @user.id%>            
+            <%=link_to image_tag(@user.image? ? @user.image.url : 
+              "profile_default.png",class:"user_big_image img-thumbnail"),edit_user_path(@user)%>
+          <%else%>
+            <%=image_tag(@user.image? ? @user.image.url : 
+              "profile_default.png",class:"user_big_image img-thumbnail")%>
+          <%end%>              
+        <div><b><%=link_to @user.name,"#" %></b></div>
+        <div><%=link_to @user.email,"#" %></div>
+        <span><%= pluralize(@user.products.count, "products") %></span>
+        <section class="stats">
+          <%= render "shared/stats" %>
+        </section >         
       </aside>
-      <div class="col-md-8">
-        <%= render "follow_form" if user_signed_in? %>
-        <div>
-        <label class="btn btn-primary btnAddPro">Add Product</label>
-        </div>
-        <div class="col-md-7 col-md-offset-1 post_product">
-            <%#= render "shared/product_form" %>
-        </div>        
+      <div class="col-md-7">
         <div class="col-md-12">
-          <% if @user.products.any? %>
-            <h3>Products (<%= @user.products.count %>)</h3>
+          <% if @user.products.any? %>            
             <ol class="products">
               <%= render @products %>
             </ol>
@@ -40,14 +38,8 @@
           <% end %>
         </div>
       </div>
+
+      <div class="col-md-3">
+          Suggest Shop
+      </div>
     </div>
-    </div>      
-  </div>
-</div>
-<script type="text/javascript">
-  $(".post_product").hide();
-  $(".btnAddPro").click(function(){    
-    $(".post_product").show();
-    $(".btnAddPro").hide();
-  });
-</script>

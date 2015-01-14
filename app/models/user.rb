@@ -11,11 +11,16 @@ class User < ActiveRecord::Base
 
   attr_accessor :remember_token, :password_not_require
   before_save -> { self.email.downcase! }
-  
+
+  mount_uploader :image, PictureUploader
+  mount_uploader  :cover, PictureUploader
+  validate  :picture_size
+  validate  :picture_cover_size
+
   validates_presence_of :name, :email
   validates_uniqueness_of :name, :email
-  validates_format_of :email, with: /[^@\s]+@[\w\-_\.]+\.\w{2,4}/i
-  validates_length_of :password, minimum: 6, unless: :password_not_require
+  validates_format_of :email, with: /[^@\s]+@[\w\-_\.]+\.\w{2,4}/i  
+  validates :password, length:{minimum: 6}, allow_blank: true
   
   has_secure_password
   def self.digest(string)
@@ -40,6 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def authenticated?(remember_token)
+     return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
@@ -72,4 +78,16 @@ class User < ActiveRecord::Base
     Product.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
+
+  def picture_size
+      if image.size > 2.megabytes
+        errors.add(:image, "should be less than 2MB")
+      end
+  end
+
+  def picture_cover_size
+      if image.size > 5.megabytes
+        errors.add(:image, "should be less than 5MB")
+      end
+    end
 end
