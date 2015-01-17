@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 250 }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(updated_at: :desc) }
   validate  :picture_size
 
    private

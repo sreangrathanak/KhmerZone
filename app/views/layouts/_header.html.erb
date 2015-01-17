@@ -5,7 +5,15 @@
     <%if user_signed_in?%>
       <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>
       <%= link_to raw('<div class="glyphicon glyphicon-bullhorn btn-lg my-btn"></div>Notification'),"#"%>
-      <%= link_to raw('<div class="glyphicon glyphicon-envelope btn-lg my-btn"></div>Message'),"#",:data=>{target:"#userMessageModal",toggle:"modal"}%>
+      <%= link_to raw('
+        <div class="glyphicon glyphicon-envelope btn-lg my-btn">
+        </div>Message'),"#",
+        :data=>{target:"#userMessageModal",toggle:"modal"}%>
+        <sup class="text-danger">
+          <b>
+            <%=current_user.recive_messages_unread.count if current_user.recive_messages_unread.count >0%>
+          </b>
+        </sup>    
       <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Shops'),users_path%>
     <%else%>
       <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>

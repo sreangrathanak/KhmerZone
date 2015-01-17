@@ -5,9 +5,11 @@ class ProductsController < ApplicationController
   def create
      @product = current_user.products.new product_params
       if @product.save
+        flash[:success]="Product create"
         redirect_to root_url
       else
-        redirect_to root_url
+        flash[:danger]="Cannot create product"
+        redirect_to request.referrer || root_url
       end    
   end
 

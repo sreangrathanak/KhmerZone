@@ -1,0 +1,22 @@
+<%= form_for(current_user.send_messages.build) do |f| %>  
+  <div class="field">
+    <div class="form-group">
+      <div class="form-group">
+        <%= f.label :reciver_name%>
+        <%= f.text_field :reciver_name,class: "form-control reciver_autocomplete",
+        data:{autocomplete_source: recivers_path} %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :subject %>
+      <%= f.text_field :subject, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :content %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Send", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

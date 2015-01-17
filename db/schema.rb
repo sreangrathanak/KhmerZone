@@ -11,13 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112164913) do
+ActiveRecord::Schema.define(version: 20150116163103) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
   end
+
+  create_table "messages", force: true do |t|
+    t.integer  "sender_id"
+    t.string   "subject"
+    t.boolean  "unread",     default: true
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "reciver_id"
+  end
+
+  add_index "messages", ["reciver_id"], name: "index_messages_on_reciver_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "product_comments", force: true do |t|
     t.integer  "user_id"

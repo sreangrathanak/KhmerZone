@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+  <div class="panel panel-body">
+    From 
+    <%= link_to image_tag(@message.sender.image? ? @message.sender.image.url : 
+              "profile_default.png",class:"user_follow_image img-circle"),
+              @message.sender%>
+              <%=link_to @message.sender.name,@message.sender%>
+              to 
+    <%= link_to image_tag(@message.reciver.image? ? @message.reciver.image.url : 
+              "profile_default.png",class:"user_follow_image img-circle"),
+              @message.reciver%>
+              <%=link_to @message.reciver.name,@message.reciver%>
+  
+  
+    <div>
+      Subject: <%= @message.subject%>
+    </div>
+    <div>
+      <%= @message.content%>
+    </div>
+    <div>
+      <%= @message.unread%>
+    </div>
+    <div>
+      Date send: <%= @message.created_at%>
+      Date view: <%= @message.updated_at%>
+    </div>
+  </div>
+</div>

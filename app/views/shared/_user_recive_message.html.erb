@@ -1,0 +1,4 @@
+  <% @messages=current_user.recive_messages_unread.limit(15) %>
+  <%=render @messages%>
+  <hr>          
+  <center><%=link_to "see all",messages_path%></center>
