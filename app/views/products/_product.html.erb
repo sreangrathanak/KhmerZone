@@ -18,5 +18,13 @@
         <%= render "shared/update_product", product:product%>
       </div>
     <% end %>
+    <%if user_signed_in?%>
+      <%@product_comments=product.product_comments%>
+      <table id="product_comments-<%=product.id%>">      
+      <%=render partial: @product_comments%>
+      </table>
+      <%@product_comment=product.product_comments.build%>
+      <%=render "product_comments/form"%>
+    <%end%>
   </span>
 </li>

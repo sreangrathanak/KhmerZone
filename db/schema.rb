@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116163103) do
+ActiveRecord::Schema.define(version: 20150117030313) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20150116163103) do
   end
 
   add_index "product_comments", ["product_id"], name: "index_product_comments_on_product_id", using: :btree
-  add_index "product_comments", ["user_id", "product_id"], name: "index_product_comments_on_user_id_and_product_id", unique: true, using: :btree
   add_index "product_comments", ["user_id"], name: "index_product_comments_on_user_id", using: :btree
 
   create_table "product_rates", force: true do |t|

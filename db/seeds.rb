@@ -11,12 +11,14 @@ User.create!(name:  "sreangrathanak",
                password:              1234567890,
                password_confirmation: 1234567890)
 end
+#Create Category
 10.times do
   name  = Faker::Name.name
   Category.create(name: name)
 end
-category=Category.first
 
+#Create Product
+category=Category.first
 users = User.order(:created_at).take(6)
 50.times do
   name = Faker::Lorem.sentence(1)
@@ -28,6 +30,16 @@ users = User.order(:created_at).take(6)
       price: price,discount: discount,category_id: category.id)
    }
 end
+#Create Comment
+products=Product.order(:created_at).take(6)
+#10.times do
+  products.each{|product|
+    users.each{|user|
+      content=Faker::Lorem.sentence(2)
+      product.product_comments.create!(user_id: user.id,content:content)
+    }  
+  }
+#end
 
 # Following relationships
 users = User.all

@@ -1,0 +1,4 @@
+<%- if ! @product_comment.errors.any? %>
+  $("#product_comments-<%=@product_comment.product.id%>").append('<%= escape_javascript(render(@product_comment)) %>');
+  $("#product_comments_id-<%=@product_comment.product.id%>").val("");
+<%- end%>

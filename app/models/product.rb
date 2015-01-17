@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   belongs_to :user
   has_many :category
+  has_many :product_comments, dependent: :destroy
   validates_presence_of :price
   validates :name, presence: true, length: { maximum: 250 }
   mount_uploader :picture, PictureUploader
