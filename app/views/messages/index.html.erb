@@ -1,0 +1,42 @@
+<ul class="nav nav-tabs" id="myTab-index">
+          <li role="presentation" class="active recive"><a href="#recive_message" class="btn-user-recive-sms">My Message
+            <sup class="text-danger">
+              <b>
+                <%=current_user.recive_messages_unread.count if current_user.recive_messages_unread.count >0%>
+              </b>
+            </sup>
+            (<%=@messages_recive.count%>)</a>
+          </li>
+          <li role="presentation" class ="send"><a href="#send_message" class="btn-user-send-sms">
+          Send(<%=current_user.send_messages.count%>)</a></li>
+          <li >
+          <%=link_to "New Message",new_message_path,class:"btn-user-new-sms"%></li>
+        </ul>        
+        <div class= "send_message">
+          <%= render @messages_send%>
+        </div>
+
+        <div class= "recive_message">
+          <%= render @messages_recive%>
+        </div>
+
+
+<script type="text/javascript">  
+  $(".send_message").hide();
+  $('#myTab-index .btn-user-send-sms').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+  $('#myTab-index .btn-user-recive-sms').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });  
+  $(".btn-user-send-sms").click(function(){    
+    $(".send_message").show();
+    $(".recive_message").hide();
+  });
+  $(".btn-user-recive-sms").click(function(){    
+    $(".send_message").hide();
+    $(".recive_message").show();
+  });
+</script>

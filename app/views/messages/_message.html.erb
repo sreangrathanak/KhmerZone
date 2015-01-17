@@ -1,0 +1,9 @@
+    <div>
+      <%= link_to image_tag(message.sender.image? ? message.sender.image.url : 
+              "profile_default.png",class:"user_follow_image img-circle"),message%>
+      <%= link_to message.sender.name,message%>
+      [<%= message.subject%>]
+      [<%= message.content%>]
+      [<%= message.created_at%>]
+      [<%= message.unread%>]
+    </div>

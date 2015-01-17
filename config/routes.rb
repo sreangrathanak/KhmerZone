@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   resources :products
   resources :relationships,       only: [:create, :destroy]
+  resources :messages
+  resources :recivers
 end

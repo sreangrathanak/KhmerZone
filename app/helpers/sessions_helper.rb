@@ -23,6 +23,10 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
+  def current_sign_in_user?(user)
+    session[:user_id] == user.id
+  end
+
   def forget(user)
     user.forget
     cookies.delete :user_id

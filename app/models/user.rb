@@ -9,6 +9,15 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :send_messages, class_name:  "Message",
+                                  foreign_key: "sender_id",
+                                  dependent:   :destroy
+   has_many :recive_messages, class_name:  "Message",
+                                   foreign_key: "reciver_id",
+                                   dependent:   :destroy
+  has_many :recivers, through: :send_messages, source: :reciver
+  has_many :senders, through: :recive_messages, source: :sender
+
   attr_accessor :remember_token, :password_not_require
   before_save -> { self.email.downcase! }
 
@@ -90,4 +99,8 @@ class User < ActiveRecord::Base
         errors.add(:image, "should be less than 5MB")
       end
     end
+
+  def recive_messages_unread
+    self.recive_messages.where(unread: true)
+  end
 end
