@@ -1,0 +1,10 @@
+<div >
+  <div id="like_products-<%=product.id%>">
+    <%@product=product%>
+    <%if product.user_liking?(current_user)%>
+      <%=render "products/unlike_form"%>
+    <%else%>      
+      <%=render "products/like_form"%>
+    <%end%>
+  </div>  
+</div>
