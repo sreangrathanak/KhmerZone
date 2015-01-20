@@ -1,0 +1,11 @@
+<%= form_for(current_user.product_likes.find_by(product_id: @product.id),
+             html: { method: :delete },remote: true) do |f| %>  
+  <%= button_tag(type: 'submit', class: "") do %>
+    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+  <% end %>  
+<% end %>
+<%if @product.product_likes.count > 0%>
+    <%= "You" if @product.user_liking?(current_user)%>
+    <%="and other #{@product.product_likes.count-1}" if @product.product_likes.count > 1 %>
+    like this.
+<%end%>

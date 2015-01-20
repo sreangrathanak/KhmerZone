@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   resources :messages
   resources :recivers
   resources :product_comments
+  resources :product_likes,       only: [:create, :destroy]
 end

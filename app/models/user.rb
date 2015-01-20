@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :products, dependent: :destroy
   has_many :product_comments, dependent: :destroy
+  has_many :product_likes, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy

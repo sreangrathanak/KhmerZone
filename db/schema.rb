@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117030313) do
+ActiveRecord::Schema.define(version: 20150119020640) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(version: 20150117030313) do
 
   add_index "product_comments", ["product_id"], name: "index_product_comments_on_product_id", using: :btree
   add_index "product_comments", ["user_id"], name: "index_product_comments_on_user_id", using: :btree
+
+  create_table "product_likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "product_likes", ["product_id"], name: "index_product_likes_on_product_id", using: :btree
+  add_index "product_likes", ["user_id", "product_id"], name: "index_product_likes_on_user_id_and_product_id", unique: true, using: :btree
+  add_index "product_likes", ["user_id"], name: "index_product_likes_on_user_id", using: :btree
 
   create_table "product_rates", force: true do |t|
     t.integer  "user_id"
