@@ -19,9 +19,14 @@
       </div>
     <% end %>
     <%if user_signed_in?%>
+      <%@product=product%>
+      <div >        
+        <%= render "products/user_rating"%>
+      </div>
+      
       <div >        
         <%= render "products/user_liked",product:product%>
-      </div>
+      </div>      
       <%@product_comments=product.product_comments%>
       <table id="product_comments-<%=product.id%>">      
       <%=render partial: @product_comments%>

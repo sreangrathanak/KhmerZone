@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
   has_many :product_comments, dependent: :destroy
   has_many :product_likes, dependent: :destroy
   has_many :likers, through: :product_likes, source: :user
+  has_many :product_rates
+  has_many :raters, :through => :product_rates, :source => :users
   validates_presence_of :price
   validates :name, presence: true, length: { maximum: 250 }
   mount_uploader :picture, PictureUploader
@@ -11,7 +13,20 @@ class Product < ActiveRecord::Base
   default_scope -> { order(updated_at: :desc) }
   validate  :picture_size
 
-
+  def avg_rating
+    average_rating = 0.0
+    count = 0
+    product_rates.each do |rating| 
+      average_rating += rating.rate
+      count += 1
+    end
+                  
+    if count != 0
+      (average_rating / count)
+    else
+      count
+    end
+  end
   # Returns true if the current user is liking the product.
   def user_liking?(user)
     self.likers.include?(user)

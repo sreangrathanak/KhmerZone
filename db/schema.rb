@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119020640) do
+ActiveRecord::Schema.define(version: 20150120041613) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150119020640) do
   create_table "product_rates", force: true do |t|
     t.integer  "user_id"
     t.integer  "product_id"
-    t.integer  "rate"
+    t.integer  "rate",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

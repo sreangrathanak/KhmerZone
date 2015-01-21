@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   resources :recivers
   resources :product_comments
   resources :product_likes,       only: [:create, :destroy]
+  resources :product_rates
 end

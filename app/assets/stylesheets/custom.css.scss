@@ -163,3 +163,18 @@ clear:both;
 .btn_like{
   color: red;
 }
+
+/* Rating Stars */
+li.rating_star {
+  float:left;
+  list-style: none;
+  margin: 0;
+  padding: 0; 
+  width: 25px;
+  height: 25px;
+  background: url("star.png") top left;
+} 
+
+li.rating_star.on {
+  background: url("star.png") 0 -25px;
+}
