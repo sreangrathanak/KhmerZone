@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :product_rates
+  has_many :rated_products, :through => :product_rates, :source => :products
   has_many :products, dependent: :destroy
   has_many :product_comments, dependent: :destroy
   has_many :product_likes, dependent: :destroy
