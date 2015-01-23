@@ -1,6 +1,9 @@
 class Product < ActiveRecord::Base
   belongs_to :user
   has_many :category
+  has_many :notifications, class_name:  "Notification",
+                                  foreign_key: "notified_id", 
+                                  dependent: :destroy
   has_many :product_comments, dependent: :destroy
   has_many :product_likes, dependent: :destroy
   has_many :likers, through: :product_likes, source: :user
@@ -27,6 +30,7 @@ class Product < ActiveRecord::Base
       count
     end
   end
+
   # Returns true if the current user is liking the product.
   def user_liking?(user)
     self.likers.include?(user)

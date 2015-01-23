@@ -3,18 +3,22 @@
   <div class="col-xs-8 col-md-6">
 <div class = "left_head">
     <%if user_signed_in?%>
-      <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>
-      <%= link_to raw('<div class="glyphicon glyphicon-bullhorn btn-lg my-btn"></div>Notification'),"#"%>
-      <%= link_to raw('
-        <div class="glyphicon glyphicon-envelope btn-lg my-btn">
-        </div>Message'),"#",
-        :data=>{target:"#userMessageModal",toggle:"modal"}%>
-        <sup class="text-danger">
-          <b>
-            <%=current_user.recive_messages_unread.count if current_user.recive_messages_unread.count >0%>
-          </b>
-        </sup>    
-      <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Shops'),users_path%>
+    <table>
+      <tr>
+        <td>
+        <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>
+        </td>
+        <td>
+          <%= render "layouts/user_notifications"%>
+        </td>
+        <td>
+          <%= render "layouts/user_message_notice_header"%>
+        </td>
+        <td>
+          <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Shops'),users_path%>
+        </td>
+      </tr>
+    </table>
     <%else%>
       <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>
       <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Shops'),users_path%>

@@ -1,0 +1,12 @@
+<li id="notification-<%= notification.id %>" class="notification">  
+    <%= link_to raw("#{image_tag(notification.notifier.image? ? notification.notifier.image.url : "profile_default.png",class:"user_small_image img-circle")} 
+      #{notification.notifier.name} #{ notification.information} on you 
+      #{notification.notified.name} 
+      <font color='#{notification.isread ? "red" : "yellow"}'>View</font><hr/>"),
+    notification,id:"user-notice-#{notification.id}"%>    
+</li>
+<script type="text/javascript">
+  $("#user-notice-<%=notification.id%>").click(function(){
+    
+  });
+</script>

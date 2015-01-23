@@ -22,6 +22,11 @@ class ProductsController < ApplicationController
       end
   end
 
+  def show
+    @product= Product.find(params[:id])
+    ###find product ID
+  end
+
   def destroy
     Product.find(params[:id]).destroy
     flash[:success] = "Product deleted"
