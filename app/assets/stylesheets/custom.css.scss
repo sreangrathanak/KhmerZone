@@ -178,3 +178,13 @@ li.rating_star {
 li.rating_star.on {
   background: url("star.png") 0 -25px;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.notification-menu{
+  width:30em;
+}

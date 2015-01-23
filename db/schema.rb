@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120041613) do
+ActiveRecord::Schema.define(version: 20150122030818) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(version: 20150120041613) do
 
   add_index "messages", ["reciver_id"], name: "index_messages_on_reciver_id", using: :btree
   add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "notified_id"
+    t.integer  "notifier_id"
+    t.boolean  "ischeck",     default: false
+    t.boolean  "isread",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "information"
+  end
+
+  add_index "notifications", ["notified_id"], name: "index_notifications_on_notified_id", using: :btree
+  add_index "notifications", ["notifier_id"], name: "index_notifications_on_notifier_id", using: :btree
 
   create_table "product_comments", force: true do |t|
     t.integer  "user_id"

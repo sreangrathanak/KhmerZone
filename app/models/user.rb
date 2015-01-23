@@ -3,11 +3,17 @@ class User < ActiveRecord::Base
   has_many :rated_products, :through => :product_rates, :source => :products
   has_many :products, dependent: :destroy
   has_many :product_comments, dependent: :destroy
+
+  has_many :user_notices, :through =>:products, :source => :notifications
+  has_many :notifications, class_name:  "Notification",
+                                  foreign_key: "notifier_id", 
+                                  dependent: :destroy
+
   has_many :product_likes, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
-   has_many :passive_relationships, class_name:  "Relationship",
+  has_many :passive_relationships, class_name:  "Relationship",
                                    foreign_key: "followed_id",
                                    dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
@@ -106,5 +112,11 @@ class User < ActiveRecord::Base
 
   def recive_messages_unread
     self.recive_messages.where(unread: true)
+  end
+
+  def update_uncheck_notification
+    self.user_notices.each do |notification|      
+      notification.update_attributes ischeck:true
+    end
   end
 end

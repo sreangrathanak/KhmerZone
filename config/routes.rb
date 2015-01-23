@@ -23,4 +23,7 @@ Rails.application.routes.draw do
   resources :product_comments
   resources :product_likes,       only: [:create, :destroy]
   resources :product_rates
+  resources :notifications do
+    get "notifications/update_ischecks"    
+  end
 end
