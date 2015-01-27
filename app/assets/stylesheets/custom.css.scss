@@ -188,3 +188,54 @@ li.rating_star.on {
 .notification-menu{
   width:30em;
 }
+
+.user-profile{
+  width:65em; 
+}
+
+.modal .modal-body {
+    max-height: 35em;
+    overflow-y: auto;
+}
+.edit-user-profile{
+  margin-top:-7em; 
+  position: relative;  
+}
+
+.user-edit-form{
+  margin-top:1em;
+}
+
+.file_cover{
+  position: relative;
+}
+
+.panel {
+  @extend .panel;
+  padding: 1em 1em 1em 1em;
+  p {
+    font-size: 1em;
+  }
+}
+
+.products {
+  li {
+    &:hover > div {
+      @extend .panel-primary;
+      cursor: pointer;
+    }
+    h3 {
+      text-align: center;
+      text-transform: capitalize;
+    }
+    p {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+  }
+}
+
+.product_comments, .product_comment_form{
+  margin-top:0.5em;
+  margin-botton:0.5em;
+}

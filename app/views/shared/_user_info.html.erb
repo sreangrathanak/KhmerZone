@@ -1,4 +1,3 @@
-<%=link_to image_tag(current_user.image? ? current_user.image.url : 
-              "profile_default.png",class:"user_midle_image img-thumbnail"),current_user%>
+<%=link_to user_image_profile(current_user,size:"midle"),current_user%>
 <div><b><%=link_to current_user.name,current_user %></b></div>
 <span><%= pluralize(current_user.products.count, "products") %></span>

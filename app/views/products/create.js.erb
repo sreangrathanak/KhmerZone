@@ -1,0 +1,6 @@
+<%- if @product.errors.any? %>
+  $("#productNewModal").html("<%= escape_javascript(render 'new') %>");
+  $("#productNewModal").modal("show");
+<%- else%>  
+  $("#productNewModal").modal("hide");
+<%- end%>

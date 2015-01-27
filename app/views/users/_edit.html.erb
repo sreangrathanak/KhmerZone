@@ -1,0 +1,92 @@
+<% provide :title, "Update Profile" %>
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" 
+        aria-hidden="true">&times;</button>
+        <center><h4 class="modal-title" id="myModalLabel"><%=@user.name%></h4></center>
+      </div>
+      <%= form_for @user, html: { class: "form" },remote:true do |f| %>
+      <div class="modal-body scrollable">
+          <%= render "shared/error_message", object: f.object %>
+          <div id="cover">
+            <%#=user_image_cover @user%>
+            <div>
+              <img src="<%=@user.cover.url%>" id="imgCover" class="user_cover img-rounded">
+            </div>
+            <%= f.file_field :cover,class:"pull-right", accept: 'image/jpeg,image/gif,image/png' %>
+          </div>
+          <div class="container-fluid user-edit-form">
+          <div class="row">
+            <div class="col-md-4 edit-user-profile">
+              <%=user_image_profile @user ,border:"thumbnail",size:"big",
+              id:"imgProfile"%>
+              <div class="form-group form-inline">
+              <%= f.file_field :image,class:"profile_input" ,accept: 'image/jpeg,image/gif,image/png' %></div>
+            </div>
+            <div class="col-md-8 col-md-offset-3">
+              <div class="form-group form-inline"><%= f.label :name %>
+              <%= f.text_field :name, autofocus: true, class: "form-control" %></div>
+              
+              <div class="form-group form-inline"><%= f.label :email %>
+              <%= f.email_field :email, class: "form-control" %></div>
+
+              <div class="form-group form-inline"><%= f.label :password %>
+              <%= f.password_field :password, class: "form-control" %></div>
+
+              <div class="form-group form-inline"><%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, class: "form-control" %></div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit "Save", class: "btn btn-primary" %>        
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+  $('#user_image').bind('change', function() {
+    size_in_megabytes = this.files[0].size/1024/1024;    
+    handleFiles(this,"imgProfile");    
+    if (size_in_megabytes > 1) {
+      alert('Maximum file size is 1MB. Please choose a smaller file.');
+    }
+  });
+  $('#user_cover').bind('change', function() {
+    size_in_megabytes = this.files[0].size/1024/1024;    
+    handleFiles(this,"imgCover");
+    if (size_in_megabytes > 1) {
+      alert('Maximum file size is 1MB. Please choose a smaller file.');
+    }    
+  });
+  
+    function handleFiles(fileInput,img_ID) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+     
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img = document.getElementById(img_ID);
+            img.classList.add("obj");
+            img.file = file;
+            $(fileInput).after(img);
+     
+            var reader = new FileReader();
+            reader.onload = (function(aImg) { 
+                return function(e) { 
+                    aImg.src = e.target.result; 
+                }; 
+            })(img);
+            reader.readAsDataURL(file);
+        }    
+    }  
+</script>

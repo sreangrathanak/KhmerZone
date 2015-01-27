@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get "signin" => "sessions#new", as: :signin
   get "signout" => "sessions#destroy", as: :signout
 
-  resources :users do
+  #get "/:id" => "users#show"
+  resources :users , :path => '' do
     member do
       get :following, :followers
     end
