@@ -5,8 +5,7 @@
     <%= f.hidden_field :product_id, :value => @product.id %>        
     <%= f.hidden_field :user_id, :value => current_user.id %>        
     <%= f.hidden_field :rate, :id => form_id + "_stars" %>
-  <% end %>
-  <%=@product.id%>
+  <% end %>  
 <ul class="rating">
   <% (1..5).each do |i| %>
     <a href="#rate <%=i%>"><li class="rating_star <%="on" if i<= product_rate.rate%>" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>"></li>

@@ -1,0 +1,6 @@
+<%- if @user.errors.any? %>
+  $("#modal-edit-user").html("<%= escape_javascript(render 'edit') %>");
+  $('#modal-edit-user').modal('show');
+<%- else%>  
+  $('#modal-edit-user').modal('hide');
+<%- end%>

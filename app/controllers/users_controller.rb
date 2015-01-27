@@ -29,13 +29,23 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find params[:id]
+    respond_to do |format|
+      #format.html {  }
+      format.js
+    end  
   end
 
   def update
     if @user.update_attributes user_params
-      redirect_to edit_user_path @user, success: "Your profile has been updated!"
+      respond_to do |format|        
+        format.html { redirect_to request.referrer }
+        format.js
+      end
     else
-      render "edit"
+      respond_to do |format|        
+        format.js
+      end
     end
   end
 

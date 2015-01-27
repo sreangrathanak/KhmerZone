@@ -1,15 +1,22 @@
-<li id="user-comment_products-<%=product_comment.id%>">
-  <%=image_tag(product_comment.user.image? ? product_comment.user.image.url : 
-              "profile_default.png",class:"user_small_image img-circle")%>
-  <%=product_comment.user.name%>
-  <%=product_comment.content%>
-  <%=product_comment.created_at%>
-  <%if current_user? product_comment.user.id%>  
-  <%= link_to "Edit", edit_product_comment_path(product_comment),
-  id:"btn-edit-#{product_comment.id}",remote:true%>
-      <%= link_to " | delete", product_comment, method: :delete,
+<li id="user-comment_products-<%=product_comment.id%>" class="product_comments">
+  <table>
+    <tr>
+      <td>
+        <%=user_image_profile(product_comment.user,size:"small",border:"circle")%>
+      </td>
+      <td>
+        <%=product_comment.user.name%>
+        <%=product_comment.content%>
+        <%=product_comment.created_at%>
+        <%if current_user? product_comment.user.id%>  
+          <%= link_to "Edit", edit_product_comment_path(product_comment),
+          id:"btn-edit-#{product_comment.id}",remote:true%>
+          <%= link_to " | delete", product_comment, method: :delete,
                                        data: { confirm: "You sure?" },remote:true %>
-  <%end%>
+        <%end%>
+      </td>
+    </tr>
+  </table>
 </li>
 <script type="text/javascript">
   $("#btn-edit-<%=product_comment.id%>").click(function(){

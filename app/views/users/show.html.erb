@@ -2,11 +2,9 @@
     <div class="row">
       <div class=".col-md-9 .col-md-push-3">
           <%if current_user? @user.id%>            
-              <%=link_to image_tag(@user.cover? ? @user.cover.url : 
-              "user_default_cover.jpg",class:"user_cover img-rounded"),edit_user_path(@user)%>
+              <%=link_to user_image_cover(@user),edit_user_path(@user),remote:true%>
           <%else%>
-            <%=image_tag(@user.cover? ? @user.cover.url : 
-            "user_default_cover.jpg",class:"user_cover img-rounded")%>
+            <%=user_image_cover(@user)%>
           <%end%>
 
         <div class="pull-right">
@@ -15,11 +13,9 @@
       </div>
       <aside class="col-md-2 user-profile-info">
           <%if current_user? @user.id%>            
-            <%=link_to image_tag(@user.image? ? @user.image.url : 
-              "profile_default.png",class:"user_big_image img-thumbnail"),edit_user_path(@user)%>
+            <%=link_to user_image_profile(@user),edit_user_path(@user),remote:true%>
           <%else%>
-            <%=image_tag(@user.image? ? @user.image.url : 
-              "profile_default.png",class:"user_big_image img-thumbnail")%>
+            <%=user_image_profile @user%>
           <%end%>              
         <div><b><%=link_to @user.name,"#" %></b></div>
         <div><%=link_to @user.email,"#" %></div>

@@ -2,29 +2,50 @@ class ProductsController < ApplicationController
   before_action :user_auth, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
   
+  def new
+    @product=Product.new
+    respond_to do |format|      
+      format.js
+    end 
+  end
+
   def create
      @product = current_user.products.new product_params
       if @product.save
-        flash[:success]="Product create"
-        redirect_to root_url
+        respond_to do |format|        
+          format.html { redirect_to request.referrer }
+          format.js
+        end
       else
-        flash[:danger]="Cannot create product"
-        redirect_to request.referrer || root_url
+        respond_to do |format|        
+          format.js
+        end
       end    
   end
 
+  def edit
+    @product=Product.find params[:id]
+    respond_to do |format|      
+      format.js
+    end 
+  end
+
   def update
-    @product = Product.find(params[:id])
+      @product=Product.find params[:id]
       if @product.update_attributes product_params
-        redirect_to root_url
+        respond_to do |format|        
+          format.html { redirect_to request.referrer }
+          format.js
+        end
       else
-        render :action => "edit"
+        respond_to do |format|        
+          format.js
+        end
       end
   end
 
   def show
-    @product= Product.find(params[:id])
-    ###find product ID
+    @product= Product.find(params[:id])    
   end
 
   def destroy

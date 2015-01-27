@@ -1,1 +1,2 @@
-$("#product_comments_id-<%=@product_id%>").val("<%=@product_comment_content%>");
+$("#form_product_comments-<%=@product_comment.product.id%>").html("<%= escape_javascript(render 'form') %>");
+$("#product_comments_id-<%=@product_comment.product.id%>").val("<%=@product_comment.content%>");
