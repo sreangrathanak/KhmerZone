@@ -16,7 +16,7 @@ module SessionsHelper
   end
   
   def current_user?(id)
-    current_user == User.find(id.to_i)
+    current_user == User.friendly.find(id)
   end
 
   def sign_in(user)

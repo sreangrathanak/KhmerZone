@@ -1,0 +1,34 @@
+<div class="field">  
+  <div class="form-group"><%= f.label "UserName" %>
+    <%= f.text_field :name, autofocus: true, class: "" %></div>
+              
+  <div class="form-group"><%= f.label :email %>
+    <%= f.email_field :email, class: "" %></div>
+
+  <div class="form-group"><%= f.label :password %>
+    <%= f.password_field :password, class: "" %></div>
+
+  <div class="form-group"><%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "" %></div>
+
+  <div class="form-group"><%= f.label :store_name %>
+    <%= f.text_field :store_name, class: "" %></div>
+
+  <div class="form-group"><label>www.e-store.com\</label>
+    <%= f.text_field :url_name, class: "" %></div>
+
+  <div class="form-group"><label>Phone Lines</label>
+    <%= f.text_field :phone, class: "" %></div>
+
+  <div class="form-group"><%= f.label :address %>
+    <%= f.text_field :address, class: "" %></div>
+
+  <div class="form-group"><%= f.label :location_id %>    
+    <%=f.select(:location_id,options_from_collection_for_select(Location.all, "id", "name",@user.location_id))%></div>
+
+  <div class="form-group"><%= f.label :category_id %>
+    <%= f.text_field :category_id, class: "" %></div>
+
+  <div class="form-group"><%= f.label :about %>
+    <%= f.text_area :about,placeholder: "More about you...", class: "" %></div> 
+</div>

@@ -4,7 +4,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <center><h4 class="modal-title">New Product</h4></center>
       </div>
-      <%= form_for @product,remote:true do |f| %>
+      <%= form_for [current_user,@product],remote:true do |f| %>
         <div class="modal-body">          
             <%=render "form", f: f%>        
         </div>

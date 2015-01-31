@@ -9,9 +9,9 @@
         <%=product_comment.content%>
         <%=product_comment.created_at%>
         <%if current_user? product_comment.user.id%>  
-          <%= link_to "Edit", edit_product_comment_path(product_comment),
+          <%= link_to "Edit", edit_user_product_product_comment_path(product_comment.product.user,product_comment.product,product_comment),
           id:"btn-edit-#{product_comment.id}",remote:true%>
-          <%= link_to " | delete", product_comment, method: :delete,
+          <%= link_to " | delete", user_product_product_comment_path(product_comment.product.user,product_comment.product,product_comment), method: :delete,
                                        data: { confirm: "You sure?" },remote:true %>
         <%end%>
       </td>

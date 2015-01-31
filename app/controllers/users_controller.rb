@@ -24,12 +24,12 @@ class UsersController < ApplicationController
   end
 
   def show     
-    @user = User.find params[:id]
-    @products = @user.products.paginate(page: params[:page])    
+    @user = User.friendly.find params[:id]
+    @products = @user.products.paginate(page: params[:page])
   end
 
   def edit
-    @user = User.find params[:id]
+    @user = User.friendly.find params[:id]
     respond_to do |format|
       #format.html {  }
       format.js
@@ -37,10 +37,11 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.friendly.find params[:id]
     if @user.update_attributes user_params
       respond_to do |format|        
         format.html { redirect_to request.referrer }
-        format.js
+        format.js {render inline: "location.reload();" }
       end
     else
       respond_to do |format|        
@@ -51,14 +52,14 @@ class UsersController < ApplicationController
 
   def following
     @title = "Following"
-    @user  = User.find(params[:id])
+    @user  = User.friendly.find params[:id]
     @users = @user.following.paginate(page: params[:page])
     render "show_follow"
   end
 
   def followers
     @title = "Followers"
-    @user  = User.find(params[:id])
+    @user  = User.friendly.find params[:id]
     @users = @user.followers.paginate(page: params[:page])
     render "show_follow"
   end
@@ -66,11 +67,14 @@ class UsersController < ApplicationController
   private
 
     def set_user
-      @user = User.find params[:id]
+      @user = User.friendly.find params[:id]
     end
-
+   
     def user_params
       params.require(:user).permit(:name, :email,
-              :password, :password_confirmation,:image,:cover)
+              :password, :password_confirmation,
+              :image,:cover,:store_name,:url_name,
+              :phone,:address,:location_id,:category_id,
+              :about)
     end
 end
