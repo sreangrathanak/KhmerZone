@@ -3,7 +3,7 @@
       #{notification.notifier.name} #{ notification.information} on you 
       #{notification.notified.name} 
       <font color='#{notification.isread ? "red" : "yellow"}'>View</font><hr/>"),
-    notification,id:"user-notice-#{notification.id}"%>    
+    user_notification_path(notification.notified.user,notification),id:"user-notice-#{notification.id}"%>    
 </li>
 <script type="text/javascript">
   $("#user-notice-<%=notification.id%>").click(function(){

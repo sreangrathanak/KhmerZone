@@ -12,6 +12,10 @@ class NotificationsController < ApplicationController
   def show
     notification=Notification.find params[:id]
     notification.update_unread
-    redirect_to notification.notified
+    if notification.information =="following" || notification.information =="follow"
+      redirect_to user_path(notification.notifier)
+    else
+      redirect_to user_product_path(notification.notified.user,notification.notified)      
+    end
   end
 end

@@ -8,23 +8,22 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   get "signin" => "sessions#new", as: :signin
   get "signout" => "sessions#destroy", as: :signout
-
-  #get "/:id" => "users#show"
+  get "signup" => "users#new", as: :signup
+  get "stores" => "users#index", as: :stores
   resources :users , :path => '' do
     member do
       get :following, :followers
     end
-  end
-  get "signup" => "users#new", as: :signup
-
-  resources :products
-  resources :relationships,       only: [:create, :destroy]
-  resources :messages
-  resources :recivers
-  resources :product_comments
-  resources :product_likes,       only: [:create, :destroy]
-  resources :product_rates
-  resources :notifications do
-    get "notifications/update_ischecks"    
+    resources :products do
+      resources :product_comments
+      resources :product_likes,       only: [:create, :destroy]
+      resources :product_rates
+    end
+    resources :relationships,       only: [:create, :destroy]
+    resources :messages
+    resources :recivers    
+    resources :notifications do
+      get "notifications/update_ischecks"    
+    end
   end
 end

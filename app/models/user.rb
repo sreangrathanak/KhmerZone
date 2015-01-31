@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  belongs_to :location
   has_many :product_rates
   has_many :rated_products, :through => :product_rates, :source => :products
   has_many :products, dependent: :destroy
@@ -33,15 +34,29 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, PictureUploader
   mount_uploader  :cover, PictureUploader
+
   validate  :picture_size
   validate  :picture_cover_size
 
-  validates_presence_of :name, :email
-  validates_uniqueness_of :name, :email
+  validates_presence_of :name, :email,:url_name,:store_name
+  validates_uniqueness_of :name, :email,:url_name
   validates_format_of :email, with: /[^@\s]+@[\w\-_\.]+\.\w{2,4}/i  
   validates :password, length:{minimum: 6}, allow_blank: true
-  
+  extend FriendlyId
+    friendly_id :url_name
   has_secure_password
+
+  before_validation :check_url_and_store_name
+
+  def check_url_and_store_name
+    if self.url_name.blank?
+      self.url_name=self.name
+    end
+    if self.store_name.blank?
+      self.store_name=self.name
+    end
+  end
+
   def self.digest(string)
     BCrypt::Password.create string
   end

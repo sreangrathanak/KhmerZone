@@ -1,15 +1,39 @@
+["Phnom Penh","Pursat","Banteay Meanchey",
+  "Battambang","Kampong Cham","Kampong Speu",
+  "Kampong Thom","Kampot","Kandal","Koh Kong",
+  "Kep","Kratié","Mondulkiri","Oddar Meanchey",
+  "Pailin","Preah Sihanouk","Preah Vihear",
+  "Prey Veng","Ratanakiri","Siem Reap",
+  "Stung Treng","Svay Rieng","Takéo",
+  "Tbong Khmum","Kampong Chhnang"].each do |name|
+    Location.create name:name
+  end
+
 User.create!(name:  "sreangrathanak",
                email: "sreangrathanak@gmail.com",
                password:              1234567890,
-               password_confirmation: 1234567890)
+               password_confirmation: 1234567890,
+               store_name:"Sreang Flower",
+               url_name:"rathanakjame",
+               phone:"016921007",
+               address:"St 23,No33",
+               location_id:1,
+               about:"This About Rathanak")
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
+  about = Faker::Lorem.paragraph(2)
   User.create!(name:  name,
                email: email,
                password:              1234567890,
-               password_confirmation: 1234567890)
+               password_confirmation: 1234567890,
+               store_name: name,
+               url_name:"user_#{n}",
+               phone:"01234567#{n}",
+               address:"St wwwww, No wwwwwwwwwwww",
+               location_id:2,
+               about: about)
 end
 #Create Category
 10.times do

@@ -22,7 +22,10 @@
         <span><%= pluralize(@user.products.count, "products") %></span>
         <section class="stats">
           <%= render "shared/stats" %>
-        </section >         
+        </section >
+        <section class="more-info">
+          <%= render "shared/more_info" %>
+        </section >
       </aside>
       <div class="col-md-7">
         <div class="col-md-12">

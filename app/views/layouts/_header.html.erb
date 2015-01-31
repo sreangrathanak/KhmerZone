@@ -15,13 +15,13 @@
           <%= render "layouts/user_message_notice_header"%>
         </td>
         <td>
-          <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Shops'),users_path%>
+          <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Store'),stores_path%>
         </td>
       </tr>
     </table>
     <%else%>
       <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>
-      <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Shops'),users_path%>
+      <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Store'),stores_path%>
     <%end%>    
   </div> 
 </div>
@@ -51,7 +51,7 @@
               <%= link_to "Sign out", signout_path%>
             </li>
           </ul>
-          <%=link_to "PostPro",new_product_path,remote:true,class: "btn btn-success"%>          
+          <%=link_to "PostPro",new_user_product_path(current_user),remote:true,class: "btn btn-success"%>          
         </div>
       <%else%>
         <div class="btn">

@@ -10,7 +10,6 @@
       <div class="modal-body scrollable">
           <%= render "shared/error_message", object: f.object %>
           <div id="cover">
-            <%#=user_image_cover @user%>
             <div>
               <img src="<%=@user.cover.url%>" id="imgCover" class="user_cover img-rounded">
             </div>
@@ -25,18 +24,7 @@
               <%= f.file_field :image,class:"profile_input" ,accept: 'image/jpeg,image/gif,image/png' %></div>
             </div>
             <div class="col-md-8 col-md-offset-3">
-              <div class="form-group form-inline"><%= f.label :name %>
-              <%= f.text_field :name, autofocus: true, class: "form-control" %></div>
-              
-              <div class="form-group form-inline"><%= f.label :email %>
-              <%= f.email_field :email, class: "form-control" %></div>
-
-              <div class="form-group form-inline"><%= f.label :password %>
-              <%= f.password_field :password, class: "form-control" %></div>
-
-              <div class="form-group form-inline"><%= f.label :password_confirmation %>
-              <%= f.password_field :password_confirmation, class: "form-control" %></div>
-
+              <%=render "edit_form", f: f%>
             </div>
           </div>
         </div>

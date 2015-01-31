@@ -11,8 +11,8 @@
       Posted <%= time_ago_in_words(product.created_at) %> ago.   
     </span>
     <% if current_user? product.user.id %>      
-      <%= link_to "update", edit_product_path(product),remote:true%>
-      <%= link_to " | delete", product, method: :delete,
+      <%= link_to "update", edit_user_product_path(product.user,product),remote:true%>
+      <%= link_to " | delete", user_product_path(product.user,product), method: :delete,
                                          data: { confirm: "You sure?" } %>      
     <% end %>
     <%if user_signed_in?%>
