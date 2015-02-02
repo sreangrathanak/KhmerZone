@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150131141207) do
+ActiveRecord::Schema.define(version: 20150202034526) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 20150131141207) do
 
   add_index "notifications", ["notified_id"], name: "index_notifications_on_notified_id", using: :btree
   add_index "notifications", ["notifier_id"], name: "index_notifications_on_notifier_id", using: :btree
+
+  create_table "product_categories", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "product_comments", force: true do |t|
     t.integer  "user_id"
@@ -94,7 +101,6 @@ ActiveRecord::Schema.define(version: 20150131141207) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "picture"
-    t.integer  "category_id"
   end
 
   add_index "products", ["name"], name: "index_products_on_name", using: :btree
@@ -109,6 +115,13 @@ ActiveRecord::Schema.define(version: 20150131141207) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
+  create_table "user_categories", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -125,7 +138,6 @@ ActiveRecord::Schema.define(version: 20150131141207) do
     t.string   "address"
     t.text     "about"
     t.boolean  "isadmin",         default: false
-    t.integer  "category_id"
     t.integer  "location_id",     default: 1
   end
 

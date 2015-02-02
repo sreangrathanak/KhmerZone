@@ -4,5 +4,7 @@
   <%=@user.phone%>
   <%=@user.address%>
   <%=@user.location.name%>
-  <%=@user.category_id%>
+  <%@user.categories.all.each do |category|%>
+    <%=category.name%>
+  <%end%>
   <%=@user.about%>

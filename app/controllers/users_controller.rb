@@ -38,10 +38,15 @@ class UsersController < ApplicationController
 
   def update
     @user = User.friendly.find params[:id]
+    old_url_name=@user.url_name    
     if @user.update_attributes user_params
       respond_to do |format|        
-        format.html { redirect_to request.referrer }
-        format.js {render inline: "location.reload();" }
+        format.html { redirect_to request.referrer }        
+        if old_url_name !=@user.url_name
+          format.js {render inline: "(window.location.href='http://localhost:3000/').reload();" }
+        else
+          format.js {render inline: "location.reload();" }
+        end
       end
     else
       respond_to do |format|        
@@ -74,7 +79,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email,
               :password, :password_confirmation,
               :image,:cover,:store_name,:url_name,
-              :phone,:address,:location_id,:category_id,
-              :about)
+              :phone,:address,:location_id,:about,:category_ids=>[])
     end
 end

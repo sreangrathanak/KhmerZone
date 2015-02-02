@@ -25,10 +25,14 @@
 
   <div class="form-group"><%= f.label :location_id %>    
     <%=f.select(:location_id,options_from_collection_for_select(Location.all, "id", "name",@user.location_id))%></div>
-
-  <div class="form-group"><%= f.label :category_id %>
-    <%= f.text_field :category_id, class: "" %></div>
-
+  <div class="form-group">
+    <%= hidden_field_tag "user[category_ids][]",nil%>
+    <%Category.all.each do |category|%>
+      <%= check_box_tag "user[category_ids][]",category.id,
+      @user.category_ids.include?(category.id),id: dom_id(category)%>
+      <%= label_tag dom_id(category),category.name%>
+    <%end%>
+  </div>
   <div class="form-group"><%= f.label :about %>
     <%= f.text_area :about,placeholder: "More about you...", class: "" %></div> 
 </div>

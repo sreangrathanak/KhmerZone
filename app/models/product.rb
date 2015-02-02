@@ -1,6 +1,9 @@
 class Product < ActiveRecord::Base
   belongs_to :user
-  has_many :category
+  
+  has_many :product_categories, dependent: :destroy
+  has_many :categories,:through => :product_categories
+
   has_many :notifications, class_name:  "Notification",
                                   foreign_key: "notified_id", 
                                   dependent: :destroy
