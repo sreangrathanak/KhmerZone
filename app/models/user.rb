@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   belongs_to :location
+  
+  has_many :user_categories , dependent: :destroy
+  has_many  :categories, :through => :user_categories
+
   has_many :product_rates
   has_many :rated_products, :through => :product_rates, :source => :products
   has_many :products, dependent: :destroy

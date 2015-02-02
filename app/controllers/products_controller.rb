@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:name,:description,:price,:discount,
-        :category_id,:picture)
+        :picture,:category_ids=>[])
     end
     def correct_user
       @product = current_user.products.find_by(id: params[:id])
