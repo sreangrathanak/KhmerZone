@@ -1,0 +1,47 @@
+/* Side Navigation */
+
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 51px;
+        left: 215px;
+        width: 215px;
+        margin-left: -215px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        //background-color: #222;
+        
+        max-height: 40em;
+        overflow-y: auto;
+    }
+
+    .side-nav>li>a {
+        width: 215px;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        //background-color: #000 !important;
+    }
+}
+
+.side-nav>li>ul {
+    padding: 0;
+}
+
+.side-nav>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    color: #999;
+}
+
+.side-nav>li>ul>li>a:hover {
+    color: #000;
+}
+
+#side-menu{
+    margin-right:1.5em;
+}
