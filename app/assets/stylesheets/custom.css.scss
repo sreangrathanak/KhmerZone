@@ -179,18 +179,27 @@ li.rating_star.on {
   background: url("star.png") 0 -25px;
 }
 
-.scrollable-menu {
-    height: auto;
-    max-height: 200px;
-    overflow-x: hidden;
-}
-
 .notification-menu{
   width:30em;
 }
 
 .user-profile{
   width:65em; 
+}
+
+body{
+  overflow-x: hidden;
+  overflow-y: scroll !important;  
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
 }
 
 .modal .modal-body {
@@ -219,6 +228,7 @@ li.rating_star.on {
 }
 
 .products {
+  padding-left:0;
   li {
     &:hover > div {
       @extend .panel-primary;
@@ -238,4 +248,19 @@ li.rating_star.on {
 .product_comments, .product_comment_form{
   margin-top:0.5em;
   margin-botton:0.5em;
+}
+
+#user-header{
+  padding:0.5em 0 0 0;
+}
+
+#btn-user-header{
+  margin: 0.5em 1em 0 0;
+  padding:0.5em 0.5em 0.5em 0.5em; 
+}
+
+#side-menu{
+  ul{
+    padding-left:0;
+  }  
 }

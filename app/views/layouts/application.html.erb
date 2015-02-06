@@ -2,32 +2,33 @@
 <html>
 <head>
   <title><%= full_title yield(:title) %></title>
+  <%=render "layouts/shim"%>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>  
   <%= csrf_meta_tags %>
-  <%=render "layouts/shim"%>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class= "container">
+  
     <%= render "layouts/header" %>
-    <%= render "layouts/flash_message" %>
-    <div>    
+    <%= render "layouts/flash_message" %>    
     <%= render "shared/user_message" if user_signed_in?%>
-    </div>    
-  </div>
-  <div class= "container">    
-    <div class="my_body">
-      <div class="modal fade" id="modal-edit-user" tabindex="-1" role="dialog" 
-          aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">      
+  
+  <div class= "container-fluid">    
+    <div class="row" >    
+      <div class="my_body">
+        <div class="modal fade" id="modal-edit-user" tabindex="-1" role="dialog" 
+            aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">      
+        </div>
+        <div class="modal fade" id="productUpdateModal" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
+        </div>
+        <div class="modal fade" id="productNewModal" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
+        </div>
+        <%= yield %>
       </div>
-      <div class="modal fade" id="productUpdateModal" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
-      </div>
-      <div class="modal fade" id="productNewModal" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
-      </div>
-      <%= yield %>
     </div>
   </div>
-  <div class= "container">
+  <div class= "container-fluid">
     <%= render "layouts/footer" %>
     <div class="row"><%= debug params %></div>
   </div>

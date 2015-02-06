@@ -1,12 +1,18 @@
-<div class="dropdown">
-<%@notifications=current_user.user_notices.uncheck_notification%>
-<%= link_to raw('<div class="glyphicon glyphicon-bullhorn btn-lg my-btn"></div>Notification'),@notifications.count>0 ? user_notification_notifications_update_ischecks_path(current_user,current_user) : "#",class:"dropdown-toggle",:data => {:toggle=>"dropdown"},
-  id:"notification-menubar",remote:true%>
-    <sup class="text-danger">
-      <b>        
-        <%=@notifications.count%>
-      </b>
-    </sup>
+<li class="dropdown">
+  <%@notifications=current_user.user_notices.uncheck_notification%>
+  <%= link_to @notifications.count>0 ? user_notification_notifications_update_ischecks_path(current_user,current_user) : "#",class:"dropdown-toggle",
+    :data => {:toggle=>"dropdown"},id:"notification-menubar",remote:true do%>
+      <div class="glyphicon glyphicon-bullhorn my-btn">  
+      </div>
+      Notification
+      <%if @notifications.count >0%>
+        <sup class="badge text-danger">
+          <b>        
+            <%=@notifications.count%>
+          </b>
+        </sup>
+      <%end%>
+    <%end%>
   <ul class="dropdown-menu notification-menu">
     <li><center>Notification</center></li>
     <li class="divider"></li>
@@ -16,7 +22,7 @@
     <li class="divider"></li>
     <li><center><%=link_to "See All",user_notifications_path(current_user),class:"btn"%></center></li>
   </ul>
-</div>
+</li>
 <script type="text/javascript">
   $("#notification-menubar").click(function(e){
     <%%>    

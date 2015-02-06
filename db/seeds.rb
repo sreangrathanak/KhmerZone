@@ -35,14 +35,23 @@ User.create!(name:  "sreangrathanak",
                location_id:2,
                about: about)
 end
+#create main Category
+5.times do
+  name=Faker::Name.name
+  MainCategory.create(name: name)
+end
 #Create Category
 10.times do
   name  = Faker::Name.name
   Category.create(name: name)
 end
-
+#MainSub Category
+MainCategory.all.each do |main_category|
+  Category.all.each do |category|
+    main_category.main_sub_categories.create(category_id: category.id)
+  end
+end
 #Create Product
-category=Category.first
 users = User.order(:created_at).take(6)
 50.times do
   name = Faker::Lorem.sentence(1)
@@ -51,7 +60,7 @@ users = User.order(:created_at).take(6)
   discount=0
   users.each { |user| 
     user.products.create!(name: name,description: description,
-      price: price,discount: discount,category_id: category.id)
+      price: price,discount: discount)
    }
 end
 #Create Comment

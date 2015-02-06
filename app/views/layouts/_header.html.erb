@@ -1,65 +1,118 @@
-<header class = "navbar nav-collapse navbar-fixed-top navbar-inverse">
-<div class="row">
-  <div class="col-xs-8 col-md-6">
-<div class = "left_head">
-    <%if user_signed_in?%>
-    <table>
-      <tr>
-        <td>
-        <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>
-        </td>
-        <td>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-header-form">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <button type="button" class="pull-left navbar-toggle collapsed" data-toggle="collapse" data-target="#side-menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="#">E-Store</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="my-header-form">
+      <ul class="nav navbar-nav">
+        <%if user_signed_in?%>
+          <li>
+            <%= link_to raw('<div class="glyphicon glyphicon-home 
+            my-btn"></div>Home'),root_path%>
+          </li>
           <%= render "layouts/user_notifications"%>
-        </td>
-        <td>
-          <%= render "layouts/user_message_notice_header"%>
-        </td>
-        <td>
-          <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Store'),stores_path%>
-        </td>
-      </tr>
-    </table>
-    <%else%>
-      <%= link_to raw('<div class="glyphicon glyphicon-home btn-lg my-btn"></div>Home'),root_path%>
-      <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart btn-lg my-btn"></div>Store'),stores_path%>
-    <%end%>    
-  </div> 
-</div>
-<div class="col-xs-6 col-md-4">
-  <div class="pull-right">
-      <form class="navbar-form" role="search">
+          <li><%= render "layouts/user_message_notice_header"%></li>
+          <li>
+            <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart 
+            my-btn"></div>Store'),stores_path%>
+          </li>        
+        <%else%>
+          <li><%= link_to raw('<div class="glyphicon glyphicon-home 
+            my-btn"></div>Home'),root_path%>
+          </li>
+          <li>
+            <%= link_to raw('<div class="glyphicon glyphicon-shopping-cart 
+             my-btn"></div>Store'),stores_path%>
+          </li>
+        <%end%>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Search" name="q">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div>
-          </div>
+        </div>
       </form>
-  </div>
-</div>
-<div class="col-xs-4 col-md-2">
-  <div class = "right_head">    
-      <%if user_signed_in?%>      
-        <div class="dropdown">          
-            <%= link_to user_image_profile(current_user,size:"small",border:"circle"),
-             "#",class:"dropdown-toggle",:data => {:toggle=>"dropdown"} %>          
-          <ul class="dropdown-menu">
-            <li><%= link_to "#{current_user.name} profile", user_path(current_user) %></li>        
-            <li><%= link_to "Settings", edit_user_path(current_user),remote:true %></li>
-            <li class="divider"></li>
-            <li>
-              <%= link_to "Sign out", signout_path%>
-            </li>
+      <ul class="nav navbar-nav navbar-right">
+        <%if user_signed_in?%>
+          <li>
+            <%=link_to "PostPro",new_user_product_path(current_user),
+              remote:true,class: "btn btn-success",id:"btn-user-header"%>
+          </li>
+          <li class="dropdown">          
+            <%= link_to user_image_profile(current_user,size:"small",
+            border:"circle"),"#",class:"dropdown-toggle",id:"user-header", 
+            'aria-expanded' =>'false',:data => {:toggle=>"dropdown"} %>
+            <ul class="dropdown-menu" role="menu">
+              <li><%= link_to "#{current_user.name} profile", 
+                user_path(current_user) %>
+              </li>
+              <li>
+              <%= link_to "Settings", edit_user_path(current_user),remote:true %>
+              </li>            
+              <li class="divider"></li>
+              <li><%= link_to "Sign out", signout_path%></li>
+            </ul>
+          </li>          
+        <%else%>
+          <li>
+            <%= link_to signin_path,class:"" do%>              
+              <span class="glyphicon glyphicon-log-in"></span> Login
+            <%end%>
+          </li>
+          <li>
+            <%= link_to signup_path,class:"" do%>
+              <span class="glyphicon glyphicon-user"></span> Sign Up
+            <%end%>
+          </li>        
+        <%end%>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+
+  <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+  <div class="collapse navbar-collapse" id="side-menu">
+    <ul class="navbar-default nav navbar-nav side-nav">
+      <li>
+        <a href="#"><i class=""></i> All</a>
+      </li>          
+      <li>
+        <%MainCategory.all.each do |main_category|%>
+          <a href="javascript:;" data-toggle="collapse" 
+            data-target="#demo-<%=main_category.id%>">
+            <%= main_category.name%> 
+          </a>
+          <ul id="demo-<%=main_category.id%>" class="collapse">
+            <%main_category.categories.each do |category|%>
+              <li>
+                <a href="#"><%= category.name%></a>
+              </li>
+            <%end%>            
           </ul>
-          <%=link_to "PostPro",new_user_product_path(current_user),remote:true,class: "btn btn-success"%>          
-        </div>
-      <%else%>
-        <div class="btn">
-          <%= link_to "Sign In",signin_path,class:""%>
-          <%= link_to "|  Sign Up",signup_path,class:""%>
-        </div>
-      <%end%>
-  </div>
-  </div> 
-</div>
-</header>
+        <%end%>
+      </li>
+      <li>
+        <a href="#"><i class=""></i> About</a>
+      </li>
+      </ul>
+    </div>
+  <!-- /.navbar-collapse -->
+</nav>

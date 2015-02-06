@@ -1,9 +1,13 @@
-<%= link_to raw('
-        <div class="glyphicon glyphicon-envelope btn-lg my-btn">
-        </div>Message'),"#",
-        :data=>{target:"#userMessageModal",toggle:"modal",backdrop:"static"}%>
-        <sup class="text-danger">
-          <b>
-            <%=current_user.recive_messages_unread.count if current_user.recive_messages_unread.count >0%>
-          </b>
-        </sup> 
+<%= link_to "#",:data=>{target:"#userMessageModal",
+  toggle:"modal",backdrop:"static"} do%>
+    <div class="glyphicon glyphicon-envelope my-btn">
+    </div>
+    Message
+    <%if current_user.recive_messages_unread.count >0%>
+      <sup class="badge text-danger">
+        <b>        
+          <%=current_user.recive_messages_unread.count%>
+        </b>
+      </sup>
+    <%end%>
+<%end%>        
