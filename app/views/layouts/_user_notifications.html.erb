@@ -2,23 +2,21 @@
   <%@notifications=current_user.user_notices.uncheck_notification%>
   <%= link_to @notifications.count>0 ? user_notification_notifications_update_ischecks_path(current_user,current_user) : "#",class:"dropdown-toggle",
     :data => {:toggle=>"dropdown"},id:"notification-menubar",remote:true do%>
-      <div class="glyphicon glyphicon-bullhorn my-btn">  
-      </div>
-      Notification
-      <%if @notifications.count >0%>
-        <sup class="badge text-danger">
-          <b>        
-            <%=@notifications.count%>
-          </b>
-        </sup>
-      <%end%>
+        <div class="glyphicon glyphicon-bell">
+          <b>Notification</b>
+          <%if @notifications.size >0%>
+            <sup class="text-danger">
+              <%=@notifications.size%>
+            </sup>
+          <%end%>          
+        </div><b class="caret"></b>
     <%end%>
   <ul class="dropdown-menu notification-menu">
     <li><center>Notification</center></li>
     <li class="divider"></li>
-    <div class="scrollable-menu">
-    <%=render @notifications%>
-    </div>
+    <ul class="scrollable-menu">
+      <%=render @notifications%>
+    </ul>
     <li class="divider"></li>
     <li><center><%=link_to "See All",user_notifications_path(current_user),class:"btn"%></center></li>
   </ul>

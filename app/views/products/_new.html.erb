@@ -5,7 +5,7 @@
           <center><h4 class="modal-title">New Product</h4></center>
       </div>
       <%= form_for [current_user,@product],remote:true do |f| %>
-        <div class="modal-body">          
+        <div class="modal-body" id="scroll-style">          
             <%=render "form", f: f%>        
         </div>
         <div class="modal-footer">          

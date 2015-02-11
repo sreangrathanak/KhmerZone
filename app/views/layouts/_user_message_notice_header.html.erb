@@ -1,8 +1,8 @@
 <%= link_to "#",:data=>{target:"#userMessageModal",
   toggle:"modal",backdrop:"static"} do%>
-    <div class="glyphicon glyphicon-envelope my-btn">
+    <div class="glyphicon glyphicon-envelope">
+    <b>Message</b>
     </div>
-    Message
     <%if current_user.recive_messages_unread.count >0%>
       <sup class="badge text-danger">
         <b>        

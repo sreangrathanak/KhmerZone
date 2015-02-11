@@ -33,6 +33,7 @@ class ProductCommentsController < ApplicationController
 
   def edit
     @product_comment=ProductComment.find params[:id]    
+    @product=@product_comment.product    
     respond_to do |format|
       format.html { redirect_to(request.referrer || root_url,
             :notice => "") }          
@@ -43,6 +44,7 @@ class ProductCommentsController < ApplicationController
   def update
     @product_comment=ProductComment.find params[:id]
     @product_comment.update_attributes product_comment_params
+    @product=@product_comment.product    
     respond_to do |format|
       format.html { redirect_to(request.referrer || root_url,
             :notice => "") }          

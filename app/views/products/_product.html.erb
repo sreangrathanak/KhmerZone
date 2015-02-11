@@ -1,37 +1,24 @@
-<li id="product-<%= product.id %>" class="products">
-  <div class="panel panel-info list-group-item">
-    <div class="panel-body">
-    <%=user_image_profile(product.user,size:"small",border:"circle")%>
-    <span class="user"><%= link_to product.user.name, product.user %></span>
-    <span class="content"><%= product.name %></span>
-    <span class="content"><%= product.price %></span>
-    <span class="content"><%= product.description %></span>
-    <%= image_tag product.picture.url if product.picture? %>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(product.created_at) %> ago.   
-    </span>
-    <% if current_user? product.user.id %>      
-      <%= link_to "update", edit_user_product_path(product.user,product),remote:true%>
-      <%= link_to " | delete", user_product_path(product.user,product), method: :delete,
-                                         data: { confirm: "You sure?" } %>      
-    <% end %>
-    <%if user_signed_in?%>
-      <%@product=product%>
-      <div >        
-        <%= render "products/user_rating"%>
-      </div>    
-      <div >        
-        <%= render "products/user_liked",product:product%>
-      </div>      
-      <%@product_comments=product.product_comments%>
-      <ul id="product_comments-<%=product.id%>">      
-        <%=render partial: @product_comments%>
-      </ul>
-      <%@product_comment=product.product_comments.new%>
-        <ul id="form_product_comments-<%=product.id%>">
-          <%=render "product_comments/form"%>      
-        </ul>
-      <%end%>
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">        
+        <%= link_to product_image(product),
+        user_product_path(product.user,product)%>        
+        <div class="caption">
+            <h4 class="pull-right">$<%=product.price%></h4>
+            <h4><%= link_to truncate(product.name, :length => 20),
+            user_product_path(product.user,product)%>
+            </h4>
+            <p><%= truncate(product.description, :length => 115) %></p>
+        </div>
+    
+    <div class="ratings">
+      <p class="pull-right">31 reviews</p>
+      <p>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star-empty"></span>
+      </p>
     </div>
   </div>
-</li>
+</div>

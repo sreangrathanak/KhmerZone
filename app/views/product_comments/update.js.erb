@@ -1,4 +1,6 @@
 <%- if ! @product_comment.errors.any? %>
-  $("#product_comments-<%=@product_comment.product.id%>").append('<%= escape_javascript(render(@product_comment)) %>');
-  $("#product_comments_id-<%=@product_comment.product.id%>").val("");
+  $("#product_comments-<%=@product.id%>").append('<%= escape_javascript(render(@product_comment)) %>');
+  <%- @product_comment=ProductComment.new%>
+  $("#form_product_comments-<%=@product.id%>").html("<%= escape_javascript(render 'form') %>");
+  $("#product_comments_id-<%=@product.id%>").val("");
 <%- end%>

@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_many :rated_products, :through => :product_rates, :source => :products
   has_many :products, dependent: :destroy
   has_many :product_comments, dependent: :destroy
-
+  
+  has_many :products_categories, :through => :products, :source => :categories
+  
   has_many :user_notices, :through =>:products, :source => :notifications
   has_many :notifications, class_name:  "Notification",
                                   foreign_key: "notifier_id", 

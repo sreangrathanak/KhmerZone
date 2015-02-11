@@ -1,7 +1,10 @@
 <% if user != current_user %>
-  <li class="">    
-    <%= link_to image_tag(user.image? ? user.image.url : 
-              "profile_default.png",class:"user_midle_image img-thumbnail"),user%>
-    <%= link_to user.name, user %>
-  </li>
+  <div class="col-md-3 portfolio-item">
+    <%= link_to user_image_profile(user,size:"midle",border:"thumbnail"),user%>
+    <h3>
+      <%= link_to user.name, user %>
+    </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra 
+      euismod odio, gravida pellentesque urna varius vitae.</p>
+  </div>
 <% end %>
