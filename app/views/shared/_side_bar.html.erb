@@ -1,0 +1,30 @@
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+      <div class="collapse navbar-collapse" id="side-menu">
+        <ul class="navbar-default nav navbar-nav side-nav">
+          <li class="active">
+            <a href="#"> All</a>
+          </li>          
+          <li>        
+            <%MainCategory.all.each do |main_category|%>
+              <a href="javascript:;" data-toggle="collapse" 
+                    data-target="#demo-<%=main_category.id%>">
+                    <%= main_category.name%> 
+                  </a>
+                <ul id="demo-<%=main_category.id%>" class="collapse">
+              <%@categories.each do |category|%>
+                <%if main_category.category_ids.include?(category.id)%>
+                  
+                      <li>
+                        <a href="#"><%= category.name%></a>
+                      </li>                  
+                <%end%>
+              <%end%>
+              </ul>
+            <%end%>
+          </li>
+          <li>
+            <a href="#"><i class=""></i> About</a>
+          </li>
+          </ul>
+        </div>
+      <!-- /.navbar-collapse -->

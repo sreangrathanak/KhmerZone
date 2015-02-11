@@ -1,0 +1,37 @@
+<li id="product-<%= product.id %>" class="products">
+  <div class="panel panel-info list-group-item">
+    <div class="panel-body">
+    <%=user_image_profile(product.user,size:"small",border:"circle")%>
+    <span class="user"><%= link_to product.user.name, product.user %></span>
+    <span class="content"><%= product.name %></span>
+    <span class="content"><%= product.price %></span>
+    <span class="content"><%= product.description %></span>
+    <%= image_tag product.picture.url if product.picture? %>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(product.created_at) %> ago.   
+    </span>
+    <% if current_user? product.user.id %>      
+      <%= link_to "update", edit_user_product_path(product.user,product),remote:true%>
+      <%= link_to " | delete", user_product_path(product.user,product), method: :delete,
+                                         data: { confirm: "You sure?" } %>      
+    <% end %>
+    <%if user_signed_in?%>
+      <%@product=product%>
+      <div >        
+        <%= render "products/user_rating"%>
+      </div>    
+      <div >        
+        <%= render "products/user_liked",product:product%>
+      </div>      
+      <%@product_comments=product.product_comments%>
+      <ul id="product_comments-<%=product.id%>">      
+        <%=render partial: @product_comments%>
+      </ul>
+      <%@product_comment=product.product_comments.new%>
+        <ul id="form_product_comments-<%=product.id%>">
+          <%=render "product_comments/form"%>      
+        </ul>
+      <%end%>
+    </div>
+  </div>
+</li>

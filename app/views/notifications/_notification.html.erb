@@ -1,9 +1,19 @@
 <li id="notification-<%= notification.id %>" class="notification">  
-    <%= link_to raw("#{image_tag(notification.notifier.image? ? notification.notifier.image.url : "profile_default.png",class:"user_small_image img-circle")} 
-      #{notification.notifier.name} #{ notification.information} on you 
-      #{notification.notified.name} 
-      <font color='#{notification.isread ? "red" : "yellow"}'>View</font><hr/>"),
-    user_notification_path(notification.notified.user,notification),id:"user-notice-#{notification.id}"%>    
+    <%= link_to user_notification_path(notification.notified.user,notification),
+    id:"user-notice-#{notification.id}" do%>
+    <div class="media">
+      <span class="pull-left">        
+        <%=user_image_profile(notification.notifier,size:"small",border:"circle")%>
+      </span>
+      <div class="media-body">
+        <h5 class="media-heading"><strong><%=notification.notifier.name%></strong>
+        </h5>        
+        <p><%=notification.information%> on 
+            <%=notification.notified.name%>
+        </p>      
+      </div>      
+    </div>      
+    <%end%>
 </li>
 <script type="text/javascript">
   $("#user-notice-<%=notification.id%>").click(function(){

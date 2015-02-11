@@ -38,6 +38,10 @@ class Product < ActiveRecord::Base
   def user_liking?(user)
     self.likers.include?(user)
   end
+
+  def self.search search
+    where("name like ?", "%#{search}%")    
+  end
    private
 
     # Validates the size of an uploaded picture.

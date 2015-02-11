@@ -1,1 +1,42 @@
-<%=render @product%>
+<div class="col-md-2">
+</div>
+<div class="col-md-7">
+  <div class="thumbnail">    
+      <%=product_image(@product,size:"800X300")%>
+      <div class="caption-full">
+        <h4 class="pull-right">$<%=@product.price%></h4>
+        <h4><%= @product.name%></h4>
+        <p>See more at officail web site <a target="_blank" href="#">
+          Bootsnipp - http://bootsnipp.com</a>.
+        </p>
+        <p><%=@product.description%></p>
+      </div>
+      <div class="ratings">
+      <%if user_signed_in?%>
+        <div class="row">
+          <div class="col-md-6">
+            <%= render "products/user_liked",product:@product%>
+          </div>
+          <div class="col-md-6 pull-right">
+            <%= render "products/user_rating"%>
+          </div>
+        </div>  
+      <%end%>        
+      </div>
+    </div>
+    <div class="well">     
+      <div class="row">
+        <%@product_comments=@product.product_comments%>
+        <div class="" id="product_comments-<%=@product.id%>">      
+          <%=render partial: @product_comments%>
+        </div>
+        <%if user_signed_in?%>
+          <%@product_comment=ProductComment.new%>
+            <div class ="" id="form_product_comments-<%=@product.id%>">
+              <hr>
+              <%=render "product_comments/form"%>      
+            </div>        
+        <%end%>
+      </div>      
+    </div>
+</div>       

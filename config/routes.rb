@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "signout" => "sessions#destroy", as: :signout
   get "signup" => "users#new", as: :signup
   get "stores" => "users#index", as: :stores
+  get "simple_search" => "products#simple_search", as: :simple_search
+  resources :searches
   resources :users , :path => '' do
     member do
       get :following, :followers

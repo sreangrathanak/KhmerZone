@@ -1,4 +1,7 @@
-<ul class="nav nav-tabs" id="myTab-index">
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-10">
+    <ul class="nav nav-tabs" id="myTab-index">
           <li role="presentation" class="active recive"><a href="#recive_message" class="btn-user-recive-sms">My Message
             <sup class="text-danger">
               <b>
@@ -19,8 +22,8 @@
         <div class= "recive_message">
           <%= render @messages_recive%>
         </div>
-
-
+  </div>
+</div>
 <script type="text/javascript">  
   $(".send_message").hide();
   $('#myTab-index .btn-user-send-sms').click(function (e) {
