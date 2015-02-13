@@ -10,9 +10,13 @@ Rails.application.routes.draw do
   get "signout" => "sessions#destroy", as: :signout
   get "signup" => "users#new", as: :signup
   get "stores" => "users#index", as: :stores
-  get "simple_search" => "products#simple_search", as: :simple_search
-  resources :searches
-  resources :users , :path => '' do
+
+  get "product_search" => "searches#product_search", as: :product_search  
+  get "advance_search_form" =>"searches#advance_search_form", 
+            as: :advance_search_form
+  get "advance_search" =>"searches#advance_search", as: :advance_search
+  resources :users , only: [:index]
+  resources :users , :path => '', except: [:index] do
     member do
       get :following, :followers
     end

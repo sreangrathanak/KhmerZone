@@ -1,19 +1,16 @@
 class SearchesController < ApplicationController
-  def new
-    @search=Search.new
+  def advance_search_form
+    
   end
 
-  def create
-    @search = Search.create! search_params
-    redirect_to @search
+  def advance_search     
+    @search_products ||= Product.product_advance_search(params[:keywords],
+                    params[:category_ids],params[:min_price],
+                    params[:max_price])    
   end
-
-  def show
-    @search = Search.find params[:id]
-  end
-
-  private
-    def search_params
-      params.require(:search).permit(:keywords, :category_id,:min_price,:max_price)
-    end
+  
+  def product_search
+    @products =Product.search(params[:search]).paginate(:per_page => 18,
+     :page => params[:page])
+  end  
 end

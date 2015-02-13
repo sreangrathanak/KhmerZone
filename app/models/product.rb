@@ -39,8 +39,19 @@ class Product < ActiveRecord::Base
     self.likers.include?(user)
   end
 
-  def self.search search
-    where("name like ?", "%#{search}%")    
+  scope :search, ->(search) {
+    if search
+      where("name like ?", "%#{search}%")    
+    end
+  }
+
+  def self.product_advance_search(keywords,category_ids,min_price,max_price)
+      products = Product.order(:name)
+      products = Product.where("name like ?", "%#{keywords}%") if keywords.present?
+      products = Product.where(category_id: category_ids) if category_ids.present?
+      products = Product.where("price >= ?", min_price) if min_price.present?
+      products = Product.where("price <= ?", max_price) if max_price.present?
+      products
   end
    private
 

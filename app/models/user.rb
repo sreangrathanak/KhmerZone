@@ -140,4 +140,10 @@ class User < ActiveRecord::Base
       notification.update_attributes ischeck:true
     end
   end
+
+  scope :search,-> (search){
+    if search
+      where("name like ?", "%#{search}%")    
+    end    
+  }
 end

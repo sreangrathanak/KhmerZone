@@ -3,7 +3,7 @@
   <%= link_to @notifications.count>0 ? user_notification_notifications_update_ischecks_path(current_user,current_user) : "#",class:"dropdown-toggle",
     :data => {:toggle=>"dropdown"},id:"notification-menubar",remote:true do%>
         <div class="glyphicon glyphicon-bell">
-          <b>Notification</b>
+          <b class="hidden-sm hidden-md">Notification</b>
           <%if @notifications.size >0%>
             <sup class="text-danger">
               <%=@notifications.size%>

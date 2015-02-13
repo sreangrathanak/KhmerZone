@@ -19,13 +19,15 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all.paginate page: params[:page], per_page: 15
+  def index    
+    @users =User.search(params[:search]).paginate(:per_page => 16,
+     :page => params[:page])
   end
 
   def show     
     @user = User.friendly.find params[:id]
-    @products = @user.products.paginate(page: params[:page])
+    @products = @user.products.search(params[:search]).paginate(:per_page => 18,
+     :page => params[:page])
   end
 
   def edit
