@@ -1,7 +1,7 @@
 <%= link_to "#",:data=>{target:"#userMessageModal",
   toggle:"modal",backdrop:"static"} do%>
     <div class="glyphicon glyphicon-envelope">
-    <b>Message</b>
+    <b class="hidden-sm hidden-md">Message</b>
     </div>
     <%if current_user.recive_messages_unread.count >0%>
       <sup class="badge text-danger">

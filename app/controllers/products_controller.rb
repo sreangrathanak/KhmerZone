@@ -54,9 +54,6 @@ class ProductsController < ApplicationController
     redirect_to request.referrer || root_url
   end
 
-  def simple_search
-    @products=Product.search params[:search_key]
-  end  
   private
 
     def product_params

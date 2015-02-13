@@ -1,17 +1,19 @@
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">        
         <%= link_to product_image(product),
-        user_product_path(product.user,product)%>        
+        user_product_path(product.user,product)%>
         <div class="caption">
             <h4 class="pull-right">$<%=product.price%></h4>
             <h4><%= link_to truncate(product.name, :length => 20),
             user_product_path(product.user,product)%>
             </h4>
-            <p><%= truncate(product.description, :length => 115) %></p>
+            <p><%= truncate(product.description, :length => 70) %>
+            <%= link_to "..Read more",user_product_path(product.user,product)%>
+            </p>
         </div>
     
     <div class="ratings">
-      <p class="pull-right">31 reviews</p>
+      <p class="pull-right"><%=product.product_comments.size%> comment</p>
       <p>
           <span class="glyphicon glyphicon-star"></span>
           <span class="glyphicon glyphicon-star"></span>
@@ -19,6 +21,11 @@
           <span class="glyphicon glyphicon-star"></span>
           <span class="glyphicon glyphicon-star-empty"></span>
       </p>
+    </div>    
+    <div class="shoper">  
+      Shop:<%= link_to product.user.name, product.user%>
+      <br/>
+      Contact:<%= truncate(product.user.phone, :length => 23)%>    
     </div>
   </div>
 </div>

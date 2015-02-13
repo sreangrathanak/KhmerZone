@@ -2,9 +2,13 @@
   <div class="col-md-3 portfolio-item">
     <%= link_to user_image_profile(user,size:"midle",border:"thumbnail"),user%>
     <h3>
-      <%= link_to user.name, user %>
-    </h3>
+      <%= link_to truncate(user.name, :length => 16), user %>
+    </h3>      
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra 
       euismod odio, gravida pellentesque urna varius vitae.</p>
+    <div>
+      <%@user=user%>
+      <%= render "users/follow_form" if user_signed_in? %>
+    </div>
   </div>
 <% end %>

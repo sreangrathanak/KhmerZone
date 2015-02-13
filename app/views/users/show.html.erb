@@ -1,7 +1,6 @@
 <% provide :title, "Users" %> 
-    <div class="row">
-    <div class="col-md-2"></div>
-      <div class="col-md-10">
+    <div class="">    
+      <div>  
         <div id="cover_slide" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
           <%3.times do |n|%>
@@ -23,14 +22,18 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
         </div>  
+      </div>
         <div class="pull-right">
           <%= render "follow_form" if user_signed_in? %>          
         </div>
       <div class="row">
         <div class="col-md-9">
           <div class="row">
-            <% if @user.products.any? %>            
+            <% if @products.any? %>            
               <div class="">
+                <%unless params[:search].blank?%>
+                  <h3>Search Result</h3>
+                <%end%>
                 <%= render @products %>
               </div>
               <%= will_paginate @products %>
@@ -39,10 +42,9 @@
         </div>
         <div class="col-md-3">
           Suggest Shop
-        </div>
-      </div>
-      </div>
+        </div>      
     </div>
+  </div>
 <script>
     $('.carousel').carousel({
         interval: 5000 //changes the speed

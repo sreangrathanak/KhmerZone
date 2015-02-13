@@ -114,7 +114,7 @@ input {
 }
 
 .user_midle_image{
-  width: 400px;
+  width: 350px;
   height:200px;  
 }
 
@@ -155,8 +155,15 @@ clear:both;
 .border-pro-img{
   
 }
+.thumbnail{
+  .credit{
+  width: 35px;
+   height: 35px;
+  }
+}
+
 @media(min-width:768px) {
-.thumbnail  {
+.thumbnail{
   .pro_image_320X150{
     //width:320px;
     height:150px;
@@ -273,7 +280,9 @@ body.modal-open {
 }
 
 .portfolio-item {
-    margin-bottom: 25px;
+    height: 400px;
+    overflow: hidden;
+    margin-bottom: 25px;    
 }
 
 .ratings {
@@ -292,7 +301,7 @@ body.modal-open {
 }
 
 .caption {
-    height: 130px;
+    height: 120px;
     overflow: hidden;
 }
 

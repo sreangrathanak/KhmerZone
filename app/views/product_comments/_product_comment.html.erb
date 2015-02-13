@@ -1,27 +1,35 @@
 <div class="col-md-12 product_comments" 
-  id="user-comment_products-<%=product_comment.id%>">    
-    <table>
-      <tr>
-        <td >
-          <%=user_image_profile(product_comment.user,size:"small",border:"circle")%>
-        </td>
-          <td class="comment_info"><big><%=product_comment.user.name%></big></td>
-          <td class="comment_info"><%=product_comment.content%></td>          
-          <%if current_user? product_comment.user.id%>
-            <td class="comment_info">
-              <%= link_to "Edit", edit_user_product_product_comment_path(product_comment.product.user,product_comment.product,
-                product_comment),
-              id:"btn-edit-#{product_comment.id}",remote:true%>
-            </td>
-            <td class="comment_info">
-              <%= link_to "delete", user_product_product_comment_path(product_comment.product.user,product_comment.product,
+  id="user-comment_products-<%=product_comment.id%>">
+    <p class="">
+      
+        <div class="col-md-4">
+          
+              <%= link_to user_image_profile(product_comment.user,size:"small",
+              border:"circle"),product_comment.user%>
+          
+              <big>
+                <b><%= link_to product_comment.user.name,product_comment.user%></b>
+              </big>
+          </div>
+        <div >
+        <%=product_comment.content%>
+        <%=time_ago_in_words(product_comment.created_at)%> ago
+      
+        <%if current_user? product_comment.user.id%>
+         
+              <%= link_to edit_user_product_product_comment_path(product_comment.product.user,product_comment.product,product_comment),
+              id:"btn-edit-#{product_comment.id}",remote:true do%>
+                <i class="glyphicon glyphicon-edit"></i>
+              <%end%>            
+              <%= link_to user_product_product_comment_path(product_comment.product.user,product_comment.product,
                 product_comment), method: :delete,
-                data: { confirm: "You sure?" },remote:true %>
-            </td>
+                data: { confirm: "You sure?" },remote:true do%>
+                <i class="glyphicon glyphicon-trash"></i>
+              <%end%>
+         
           <%end%>
-          <td class="comment_info"><%=time_ago_in_words(product_comment.created_at)%> ago</td>
-        </tr>
-    </table>
+        </div>         
+    </p>
     <hr>
 </div>
 <script type="text/javascript">
