@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   
   def new
     @product=Product.new
+    @product.product_images.build
     respond_to do |format|      
       format.js
     end 
@@ -51,14 +52,15 @@ class ProductsController < ApplicationController
   def destroy
     Product.find(params[:id]).destroy
     flash[:success] = "Product deleted"
-    redirect_to request.referrer || root_url
+    redirect_to root_url
   end
 
   private
 
     def product_params
       params.require(:product).permit(:name,:description,:price,:discount,
-        :picture,:category_ids=>[])
+        :picture,:category_ids=>[],
+        product_images_attributes: [:id, :path, :_destroy])
     end
     def correct_user
       @product = current_user.products.find_by(id: params[:id])

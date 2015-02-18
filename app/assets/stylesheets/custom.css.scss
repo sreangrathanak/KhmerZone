@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+#application{
+  margin-top:1em;  
+}
+
 ul {
   list-style: none;
 }
@@ -144,10 +148,6 @@ clear:both;
   position: relative;
 }
 
-.home-info{
-  padding-top:0.8em;
-}
-
 .products{
   height:100px;
 }
@@ -163,6 +163,10 @@ clear:both;
 }
 
 @media(min-width:768px) {
+#my-header-form,#search-bar{
+  float:left;  
+}
+
 .thumbnail{
   .pro_image_320X150{
     //width:320px;
@@ -176,9 +180,13 @@ clear:both;
 }
 .carousel-inner > .item,.carousel-inner > .item > a{
 .user_cover_800X300{
-    width:800px;
+    width:1300px;
     height:300px; 
   }
+.pro_image_800X300{
+    width:800px;
+    height:400px; 
+  }  
 }
 
 #follow_form{

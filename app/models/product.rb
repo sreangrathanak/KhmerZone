@@ -1,6 +1,9 @@
-class Product < ActiveRecord::Base
+class Product < ActiveRecord::Base   
   belongs_to :user
   
+  has_many :product_images, dependent: :destroy
+  accepts_nested_attributes_for :product_images,:allow_destroy => true
+
   has_many :product_categories, dependent: :destroy
   has_many :categories,:through => :product_categories
 
@@ -14,10 +17,8 @@ class Product < ActiveRecord::Base
   has_many :raters, :through => :product_rates, :source => :users
   validates_presence_of :price
   validates :name, presence: true, length: { maximum: 250 }
-  mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
   default_scope -> { order(updated_at: :desc) }
-  validate  :picture_size
 
   def avg_rating
     average_rating = 0.0
@@ -55,10 +56,5 @@ class Product < ActiveRecord::Base
   end
    private
 
-    # Validates the size of an uploaded picture.
-    def picture_size
-      if picture.size > 5.megabytes
-        errors.add(:picture, "should be less than 5MB")
-      end
-    end
+    # Validates the size of an uploaded picture.    
 end

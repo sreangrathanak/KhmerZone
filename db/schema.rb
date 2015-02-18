@@ -11,12 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211015900) do
+ActiveRecord::Schema.define(version: 20150215162542) do
 
   create_table "categories", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+  end
+
+  create_table "images", force: true do |t|
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "locations", force: true do |t|
@@ -82,6 +89,13 @@ ActiveRecord::Schema.define(version: 20150211015900) do
   add_index "product_comments", ["product_id"], name: "index_product_comments_on_product_id", using: :btree
   add_index "product_comments", ["user_id"], name: "index_product_comments_on_user_id", using: :btree
 
+  create_table "product_images", force: true do |t|
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "product_id"
+  end
+
   create_table "product_likes", force: true do |t|
     t.integer  "user_id"
     t.integer  "product_id"
@@ -113,7 +127,6 @@ ActiveRecord::Schema.define(version: 20150211015900) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "picture"
   end
 
   add_index "products", ["name"], name: "index_products_on_name", using: :btree
@@ -138,9 +151,27 @@ ActiveRecord::Schema.define(version: 20150211015900) do
     t.datetime "updated_at"
   end
 
+  create_table "shops", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.text     "about"
+    t.string   "phones"
+    t.string   "location"
+    t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_categories", force: true do |t|
     t.integer  "user_id"
     t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_shops", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "shop_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -153,7 +184,6 @@ ActiveRecord::Schema.define(version: 20150211015900) do
     t.datetime "updated_at"
     t.string   "remember_digest"
     t.string   "image"
-    t.string   "cover"
     t.string   "store_name"
     t.string   "url_name"
     t.string   "phone"

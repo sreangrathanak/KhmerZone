@@ -1,0 +1,29 @@
+<%if @product.product_images.size>1%>
+<div id="product_image_slide" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+    <%n=0%>
+    <%@product.product_images.each do |image|%>
+      <li data-target="#product_image_slide" data-slide-to="<%=n%>" class="<%=n!=1 ? "" : "active"%>"></li>            
+            <%n=n+1%>
+    <%end%>
+    </ol>
+    <div class="carousel-inner">
+      <%n=0%>
+      <%@product.product_images.each do |image|%>              
+        <div class="item <%=n!=1 ? "" : "active"%>">                
+          <%=product_image(image,size:"800X300")%>
+        </div>
+        <%n=n+1%>              
+      <%end%>            
+    </div>
+              
+    <a class="left carousel-control" href="#product_image_slide" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#product_image_slide" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+<%else%>
+  <%=product_image(@product.product_images.first,size:"800X300")%>
+<%end%>

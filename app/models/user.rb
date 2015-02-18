@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
-  belongs_to :location
   
+  has_many :images, dependent: :destroy
+  accepts_nested_attributes_for :images,:allow_destroy => true
+
+  belongs_to :location
+  has_many :user_shops
+  has_many  :shops, :through => :user_shops
+
   has_many :user_categories , dependent: :destroy
   has_many  :categories, :through => :user_categories
 
@@ -39,10 +45,8 @@ class User < ActiveRecord::Base
   before_save -> { self.email.downcase! }
 
   mount_uploader :image, PictureUploader
-  mount_uploader  :cover, PictureUploader
 
-  validate  :picture_size
-  validate  :picture_cover_size
+  validate  :picture_size  
 
   validates_presence_of :name, :email,:url_name,:store_name
   validates_uniqueness_of :name, :email,:url_name
@@ -124,12 +128,6 @@ class User < ActiveRecord::Base
         errors.add(:image, "should be less than 2MB")
       end
   end
-
-  def picture_cover_size
-      if image.size > 5.megabytes
-        errors.add(:image, "should be less than 5MB")
-      end
-    end
 
   def recive_messages_unread
     self.recive_messages.where(unread: true)

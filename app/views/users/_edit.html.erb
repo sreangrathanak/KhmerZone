@@ -1,5 +1,5 @@
 <% provide :title, "Update Profile" %>
-  <div class="modal-dialog  modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" 
@@ -9,21 +9,23 @@
       <%= form_for @user, html: { class: "form" },remote:true do |f| %>
       <div class="modal-body scrollable" id="scroll-style">
           <%= render "shared/error_message", object: f.object %>
-          <div id="cover">
-            <div>
-              <img src="<%=@user.cover.url%>" id="imgCover" class="user_cover img-rounded">
-            </div>
-            <%= f.file_field :cover,class:"pull-right", accept: 'image/jpeg,image/gif,image/png' %>
+          <div class="field">
+            <h2>Cover</h2>
+            <%= f.fields_for :images do |builder| %>
+              <%= render "image_fields",f: builder%>
+            <% end %>             
+            <%= link_to_add_fields "Add Image",f,:images %>
           </div>
           <div class="container-fluid user-edit-form">
           <div class="row">
-            <div class="col-md-4 edit-user-profile">
+            <div class="col-md-12">
+              <h3>Profile</h3>
               <%=user_image_profile @user ,border:"thumbnail",size:"big",
               id:"imgProfile"%>
               <div class="form-group form-inline">
               <%= f.file_field :image,class:"profile_input" ,accept: 'image/jpeg,image/gif,image/png' %></div>
             </div>
-            <div class="col-md-8 col-md-offset-3">
+            <div class="col-md-12">
               <%=render "edit_form", f: f%>
             </div>
           </div>
@@ -39,6 +41,20 @@
 
 
 <script type="text/javascript">
+  $(document).ready(function(){        
+    $("form").on("click",".add_fields",function(){ 
+      time = new Date().getTime();
+      regexp = new RegExp($(this).data("id"),"g");  
+      $(this).before($(this).data("fields").replace(regexp,time));
+      event.preventDefault();
+    });
+    $("form").on("click",".remove_fields",function(){ 
+      $(this).prev("input[type=hidden]").val("1");
+      $(this).closest("fieldset").hide();
+      event.preventDefault();
+    });  
+  });  
+
   $('#user_image').bind('change', function() {
     size_in_megabytes = this.files[0].size/1024/1024;    
     handleFiles(this,"imgProfile");    
