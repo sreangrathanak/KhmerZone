@@ -7,6 +7,9 @@ class UsersController < ApplicationController
                                         :following, :followers]
   def new
     @user = User.new
+    3.times do
+      @user.images.build
+    end
   end
 
   def create
@@ -14,7 +17,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       redirect_to @user, success: "Thank you for signing up!"
-    else
+    else    
       render "new"
     end
   end
@@ -41,7 +44,7 @@ class UsersController < ApplicationController
   def update
     @user = User.friendly.find params[:id]
     old_url_name=@user.url_name    
-    if @user.update_attributes user_params
+    if @user.update_attributes user_params             
       respond_to do |format|        
         format.html { redirect_to request.referrer }        
         if old_url_name !=@user.url_name
@@ -81,6 +84,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email,
               :password, :password_confirmation,
               :image,:cover,:store_name,:url_name,
-              :phone,:address,:location_id,:about,:category_ids=>[])
+              :phone,:address,:location_id,:about,
+              :category_ids=>[],
+              images_attributes: [:id, :path, :_destroy])
     end
 end

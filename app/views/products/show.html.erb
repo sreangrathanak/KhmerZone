@@ -1,8 +1,6 @@
-<div class="col-md-2">
-</div>
-<div class="col-md-7">
-  <div class="thumbnail">    
-      <%=product_image(@product,size:"800X300")%>
+<div class="col-md-9">
+  <div class="thumbnail">      
+        <%= render "slide_image"%>
       <div class="caption-full">
         <h4 class="pull-right">$<%=@product.price%></h4>
         <h4><%= @product.name%></h4>

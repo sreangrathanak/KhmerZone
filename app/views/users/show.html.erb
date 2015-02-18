@@ -1,27 +1,7 @@
 <% provide :title, "Users" %> 
     <div class="">    
       <div>  
-        <div id="cover_slide" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-          <%3.times do |n|%>
-            <li data-target="#cover_slide" data-slide-to="<%=n%>" class="<%=n!=1 ? "" : "active"%>"></li>            
-          <%end%>
-          </ol>
-          <div class="carousel-inner">
-            <%3.times do |n|%>
-              <div class="item <%=n!=1 ? "" : "active"%>">                
-                <%=user_image_cover(@user,size:"800X300")%>
-              </div>
-            <%end%>              
-          </div>
-
-          <a class="left carousel-control" href="#cover_slide" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#cover_slide" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>  
+      <%= render "cover_slide"%>
       </div>
         <div class="pull-right">
           <%= render "follow_form" if user_signed_in? %>          
@@ -45,7 +25,7 @@
         </div>      
     </div>
   </div>
-<script>
+<script type="text/javascript">
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })

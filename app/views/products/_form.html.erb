@@ -1,9 +1,11 @@
        <%= render "shared/error_message", object: f.object %>
           <div class="field">  
-            <span class="form-group picture">    
-              <%= f.label :picture %>
-              <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-            </span>    
+            <span class="form-group picture">
+              <%= f.fields_for :product_images do |builder| %>            
+                <%= render "product_image_fields",f: builder%>           
+              <% end %> 
+              <%= link_to_add_fields "Add Image",f,:product_images %>              
+            </span>
             <div class="form-group">
               <%= f.label :name %>
               <%= f.text_field :name, autofocus: true, class: "form-control" %>
@@ -28,4 +30,19 @@
               <%= f.label :description %>
               <%= f.text_area :description, placeholder: "More detail..." %>
             </div>
-          </div>  
+          </div> 
+<script type="text/javascript">
+  $(document).ready(function(){        
+    $("form").on("click",".add_fields",function(){ 
+      time = new Date().getTime();
+      regexp = new RegExp($(this).data("id"),"g");  
+      $(this).before($(this).data("fields").replace(regexp,time));
+      event.preventDefault();
+    });
+    $("form").on("click",".remove_fields",function(){ 
+      $(this).prev("input[type=hidden]").val("1");
+      $(this).closest("fieldset").hide();
+      event.preventDefault();
+    });  
+  });
+</script>

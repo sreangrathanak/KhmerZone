@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   get "advance_search_form" =>"searches#advance_search_form", 
             as: :advance_search_form
   get "advance_search" =>"searches#advance_search", as: :advance_search
-  resources :users , only: [:index]
-  resources :users , :path => '', except: [:index] do
+  
+  resources :images
+  resources :users , :path => ''do
     member do
       get :following, :followers
     end

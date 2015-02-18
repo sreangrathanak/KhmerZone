@@ -9,7 +9,7 @@
     Location.create name:name
   end
 
-User.create!(name:  "sreangrathanak",
+user=User.new(name:  "sreangrathanak",
                email: "sreangrathanak@gmail.com",
                password:              1234567890,
                password_confirmation: 1234567890,
@@ -19,12 +19,17 @@ User.create!(name:  "sreangrathanak",
                address:"St 23,No33",
                location_id:1,
                about:"This About Rathanak")
+  3.times do
+    user.images.build(path:"default.png")
+  end
+  user.save
+
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   about = Faker::Lorem.paragraph(2)
-  User.create!(name:  name,
+  user=User.new(name:  name,
                email: email,
                password:              1234567890,
                password_confirmation: 1234567890,
@@ -34,6 +39,10 @@ User.create!(name:  "sreangrathanak",
                address:"St wwwww, No wwwwwwwwwwww",
                location_id:2,
                about: about)
+  3.times do
+    user.images.build path:"default.png"
+  end
+  user.save
 end
 #create main Category
 5.times do
